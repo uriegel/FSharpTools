@@ -5,7 +5,7 @@
     <Version>0.0.1</Version>
     <Authors>Uwe Riegel</Authors>
     <Company>Uwe Riegel</Company>
-    <Description>Language extensios for F#</Description>
+    <Description>Language extensions for F#</Description>
     <PackageLicenseUrl>https://github.com/uriegel/FSharpTools/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/uriegel/FSharpTools</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>FSharpTools</name></assembly>
+<members>
+<member name="M:SocketExtensions.Socket.SetDualMode(System.Net.Sockets.Socket)">
+ <summary>
+ Setting DualMode, support for either IPv6 or IPv4.
+ <list type="bullet">
+ <listheader>
+ <description>Setting for TcpServer:</description>
+ </listheader>
+ <item>
+ <description>tcpServer.Server.SetDualMode()</description>
+ </item>
+ </list>
+ <list type="bullet">
+ <listheader>
+ <description>Setting for TcpClient:</description>
+ </listheader>
+ <item>
+ <description>tcpClient.Client.SetDualMode()</description>
+ </item>
+ </list>
+ <remarks>
+ Setting for TcpServer: "IPAddress.IPv6Any", for TcpClient "AddressFamily.InterNetworkV6".
+ </remarks>
+ </summary>
+</member>
+<member name="M:DisposableExtensions.getUnmanagedDisposable(Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit}},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit})">
+ <summary>Returns a new type that implements managed and unmanaged disposal
+ You have to implement <c>IDisposable</c> and call in implemented <c>Dispose</c> the new type's <c>d.Dispose()</c> method
+ You have to also create a Finalizer which calls the new type's <c>DoFinalize()</c> method
+ That's all!</summary>
+ <param name="doDispose">The function that disposes managed resources.</param>
+ <param name="doUnmanagedDispose">The function that disposes unmanaged resources.</param>
+ <returns>Implementation logic of <c>IDisposable</c>.</returns>
+</member>
+<member name="M:DisposableExtensions.getDisposable(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit})">
+ <summary>Returns a new type that implements managed disposal
+ You have to implement <c>IDisposable</c> and call in implemented <c>Dispose</c> the new type's <c>d.Dispose()</c> method
+ That's all!</summary>
+ <param name="doDispose">The function that disposes.</param>
+<returns>Implementation logic of <c>IDisposable</c>.</returns>
+</member>
+<member name="M:EnumExtensions.hasFlag(System.Enum,System.Enum)">
+ <summary>Check if a flag in an enum is set</summary>
+ <param name="enum">The enum to be checked.</param>
+ <param name="flag">Is this flag set?</param>
+ <returns>True when flag is set.</returns>
+</member>
+<member name="M:Json.serialize``1(``0)">
+ <summary>Serializing an object to JSON
+ Default value handling is no to emit default values
+ </summary>
+ <param name="obj">The object to serialize.</param>
+ <returns>JSON serialized object as string.</returns>
+</member>
+<member name="M:EnumerableExtensions.makeSeq``1(System.Collections.Generic.IEnumerator{``0})">
+ <summary>Turns an <c>IEnumerator</c> into a <c>seq</c></summary>
+ <param name="enumerator">Generic enumerator to be turned into a seq.</param>
+ <returns>The newly created <c>seq</c>.</returns>
+</member>
+<member name="M:EnumerableExtensions.castEnumerator``1(System.Collections.IEnumerator)">
+ <summary>Casts a non generic enumerator to a generic version of this enumerator</summary>
+<typeparam name="'U">The type of the returned casted Enumerator</typeparam>
+ <param name="enum">Non generic enumerator to be casted.</param>
+ <returns>The generic version of this non generic enumerator.</returns>
+</member>
+</members>
+</doc>

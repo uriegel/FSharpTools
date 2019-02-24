@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.2</Version>
+    <Version>0.0.5</Version>
     <Authors>Uwe Riegel</Authors>
     <Company>Uwe Riegel</Company>
     <Description>Language extensions for F#</Description>
@@ -11,7 +11,14 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>FSharpTools.XML</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
+    <Compile Include="SocketExtensions.fs" />
+    <Compile Include="Ipv6Listener.fs" />
+    <Compile Include="DisposableExtensions.fs" />
     <Compile Include="EnumExtensions.fs" />
     <Compile Include="Json.fs" />
     <Compile Include="EnumerableExtensions.fs" />

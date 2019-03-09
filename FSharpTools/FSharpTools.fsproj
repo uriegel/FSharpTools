@@ -2,13 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.5</Version>
+    <Version>0.0.6</Version>
     <Authors>Uwe Riegel</Authors>
     <Company>Uwe Riegel</Company>
     <Description>Language extensions for F#</Description>
-    <PackageLicenseUrl>https://github.com/uriegel/FSharpTools/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/uriegel/FSharpTools</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <AssemblyVersion>0.0.6.0</AssemblyVersion>
+    <FileVersion>0.0.6.0</FileVersion>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageTags>FSharp</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -16,16 +20,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="String.fs" />
+    <Compile Include="FileVersion.fs" />
+    <Compile Include="DateTime.fs" />
     <Compile Include="SocketExtensions.fs" />
     <Compile Include="Ipv6Listener.fs" />
     <Compile Include="DisposableExtensions.fs" />
     <Compile Include="EnumExtensions.fs" />
     <Compile Include="Json.fs" />
     <Compile Include="EnumerableExtensions.fs" />
+    <Compile Include="ExifReader.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

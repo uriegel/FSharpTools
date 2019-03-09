@@ -2,6 +2,59 @@
 <doc>
 <assembly><name>FSharpTools</name></assembly>
 <members>
+<member name="M:String.splitChar(System.Char,System.String)">
+ <summary>
+ Splits a string into parts, separator is one char
+ If the string is null, an emtpy array is returned
+ </summary>
+ <param name="chr">The separator</param>
+ <param name="str">String to be splitted</param>
+ <returns>The trimmed string</returns>
+</member>
+<member name="M:String.trimEnd(System.Char,System.String)">
+ <summary>
+ Functional string.TrimEnd, parameter is one trim char 
+ If the string is null, an emtpy string is returned
+ </summary>
+ <param name="chr">Char to be trimmed at the end</param>
+ <param name="str">String to be trimmed</param>
+ <returns>The trimmed string</returns>
+</member>
+<member name="M:FileVersion.compare(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+ <summary>
+ Compares to tuples containing version parts
+ </summary>
+ <returns>0 if versions are equal</returns>
+</member>
+<member name="M:FileVersion.parse(System.String)">
+ <summary>
+ Parses a version string
+ </summary>
+ <param name="versionString">The string to be parsed</param>
+ <returns>A tuple containing the 4 version parts</returns>
+</member>
+<member name="M:FileVersion.getVersion(System.Diagnostics.FileVersionInfo)">
+ <summary>
+ Gets the version of a FileVersionInfo as string 
+ </summary>
+ <param name="fvi">FileVersionInfo to be considered</param>
+ <returns>true if the version as string</returns>
+</member>
+<member name="M:FileVersion.hasInfo(System.Diagnostics.FileVersionInfo)">
+ <summary>
+ Checks if the FileVersionInfo is valid
+ </summary>
+ <param name="fvi">FileVersionInfo to be checked</param>
+ <returns>true if the version is valid</returns>
+</member>
+<member name="M:DateTime.|Value|_|(System.String,System.String)">
+ <summary>
+ Active Pattern: parses a dateTimeString using a pattern
+ </summary>
+ <param name="format">Format pattern used by parsing</param>
+ <param name="str">A string to be pared</param>
+ <returns>The parsed DateTime value or None</returns>
+</member>
 <member name="M:SocketExtensions.Socket.SetDualMode(System.Net.Sockets.Socket)">
  <summary>
  Setting DualMode, support for either IPv6 or IPv4.

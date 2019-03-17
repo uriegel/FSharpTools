@@ -2,6 +2,15 @@
 <doc>
 <assembly><name>FSharpTools</name></assembly>
 <members>
+<member name="M:Dictionary.Dict``2(System.Collections.Generic.IEqualityComparer{``0},System.Collections.Generic.IEnumerable{System.Tuple{``0,``1}})">
+ <summary>
+ Converts a sequence of KeyValuePairs to a Dictionary.
+ The key uses an IEqualityComparer
+ </summary>
+ <param name="equalityComparer">EqualityComparer used for comparing keys</param>
+ <param name="keyValuePairs">Sequence of KeyValuePairs to convert to dictionary</param>
+ <returns>The created Dictionary</returns>
+</member>
 <member name="M:String.splitChar(System.Char,System.String)">
  <summary>
  Splits a string into parts, separator is one char
@@ -100,6 +109,14 @@
  <param name="enum">The enum to be checked.</param>
  <param name="flag">Is this flag set?</param>
  <returns>True when flag is set.</returns>
+</member>
+<member name="M:Json.serializeWithOptions``1(``0)">
+ <summary>Serializing an object to JSON
+ Options are supported
+ Default value handling is no to emit default values
+ </summary>
+ <param name="obj">The object to serialize.</param>
+ <returns>JSON serialized object as string.</returns>
 </member>
 <member name="M:Json.serialize``1(``0)">
  <summary>Serializing an object to JSON

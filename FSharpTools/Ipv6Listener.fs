@@ -12,14 +12,22 @@ type Ipv6Listener = {
 
 let Create port = 
     try
-        let listener = new TcpListener(IPAddress.IPv6Any, port)
+        let listener = TcpListener(IPAddress.IPv6Any, port)
         listener.Server.SetDualMode ()
         { Listener = listener; Ipv6 = true }            
     with 
-    | :? SocketException as se ->
-        if se.SocketErrorCode <> SocketError.AddressFamilyNotSupported then raise se
-        let listener = new TcpListener(IPAddress.Any, port)
-        { Listener = listener; Ipv6 = false }            
+    | :? SocketException as se when se.SocketErrorCode = SocketError.AddressFamilyNotSupported
+        ->  let listener = TcpListener(IPAddress.Any, port) 
+            {
+                Listener = listener
+                Ipv6 = false
+            }    
+    | :? SocketException as se when se.SocketErrorCode <> SocketError.AddressFamilyNotSupported 
+        -> raise se
+    | :? SocketException as se        
+        ->
+            let listener = TcpListener(IPAddress.Any, port)
+            { Listener = listener; Ipv6 = false }            
         
 
 

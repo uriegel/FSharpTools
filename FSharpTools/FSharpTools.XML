@@ -110,6 +110,36 @@
  <param name="flag">Is this flag set?</param>
  <returns>True when flag is set.</returns>
 </member>
+<member name="M:Json.deserializeStreamWithOptions``1">
+ <summary>Deserializing an object from JSON stream
+ Options are supported
+ Default value handling is no to emit default values
+ </summary>
+ <param name="stream">The stream to contain the result.</param>
+ <returns>Deserialized object.</returns>
+</member>
+<member name="M:Json.deserializeStream``1">
+ <summary>Deserializing an object from JSON stream
+ Default value handling is no to emit default values
+ </summary>
+ <param name="stream">The stream to contain the result.</param>
+ <returns>Deserialized object.</returns>
+</member>
+<member name="M:Json.serializeStreamWithOptions``1">
+ <summary>Serializing an object to JSON stream
+ Options are supported
+ Default value handling is no to emit default values
+ </summary>
+ <param name="stream">The stream to contain the result.</param>
+ <param name="obj">The object to serialize.</param>
+</member>
+<member name="M:Json.serializeStream``1">
+ <summary>Serializing an object to JSON stream
+ Default value handling is no to emit default values
+ </summary>
+ <param name="stream">The stream to contain the result.</param>
+ <param name="obj">The object to serialize.</param>
+</member>
 <member name="M:Json.serializeWithOptions``1(``0)">
  <summary>Serializing an object to JSON
  Options are supported

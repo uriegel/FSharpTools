@@ -60,8 +60,8 @@ let private defaultSettingsWithOptions =
 let serializeWithOptions obj = JsonConvert.SerializeObject (obj, defaultSettingsWithOptions)
 
 let private serializeStreamImpl withOptions (stream: Stream) a =
-    use writer = new StreamWriter (stream)
-    use jsonWriter = new JsonTextWriter (writer)
+    let writer = new StreamWriter (stream)
+    let jsonWriter = new JsonTextWriter (writer)
     let ser = JsonSerializer ()
     ser.ContractResolver <- CamelCasePropertyNamesContractResolver ()
     ser.DefaultValueHandling <- DefaultValueHandling.Ignore
@@ -71,8 +71,8 @@ let private serializeStreamImpl withOptions (stream: Stream) a =
     jsonWriter.Flush()
 
 let private deserializeStreamImpl<'T> withOptions (stream: Stream) =
-    use reader = new StreamReader (stream)
-    use jsonReader = new JsonTextReader (reader)
+    let reader = new StreamReader (stream)
+    let jsonReader = new JsonTextReader (reader)
     let ser = JsonSerializer ()
     ser.DefaultValueHandling <- DefaultValueHandling.Ignore
     ser.ContractResolver <- CamelCasePropertyNamesContractResolver ()
@@ -98,7 +98,7 @@ let serializeStreamWithOptions<'T> = serializeStreamImpl true
 /// </summary>
 /// <param name="stream">The stream to contain the result.</param>
 /// <returns>Deserialized object.</returns>
-let deserializeStream<'T> = deserializeStreamImpl false
+let deserializeStream<'T> = deserializeStreamImpl<'T> false
 /// <summary>Deserializing an object from JSON stream
 /// Options are supported
 /// Default value handling is no to emit default values

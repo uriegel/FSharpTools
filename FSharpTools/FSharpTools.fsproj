@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     	<TargetFramework>netcoreapp3.1</TargetFramework>
-      	<Version>1.1.2</Version>
-      	<FileVersion>1.1.2.0</FileVersion>
-      	<AssemblyVersion>1.1.2.0</AssemblyVersion>
+      	<Version>1.2.0</Version>
+      	<FileVersion>1.2.0.0</FileVersion>
+      	<AssemblyVersion>1.2.0.0</AssemblyVersion>
     	<Authors>Uwe Riegel</Authors>
     	<Company>Uwe Riegel</Company>
     	<Description>Language extensions for F#</Description>
@@ -32,6 +32,7 @@
 		<Compile Include="Json.fs" />
 		<Compile Include="EnumerableExtensions.fs" />
 		<Compile Include="ExifReader.fs" />
+		<Compile Include="UrlQueryComponents.fs" />
 	</ItemGroup>
 
   	<ItemGroup>

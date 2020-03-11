@@ -16,7 +16,7 @@ let create url =
     let getPathParts url = url |> String.splitChar '/'
 
     let getPath (parts: string array) =
-        let res = parts.[3..parts.Length - 2] |> String.join '/' 
+        let res = parts.[0..parts.Length - 2] |> String.join '/' 
         match res with
         | "" -> None
         | _ -> Some res
@@ -28,7 +28,7 @@ let create url =
         let urlWithoutQuery = url |> String.substring2 0 (url |> String.lastIndexOfChar '?').Value
         let pathParts = urlWithoutQuery |> getPathParts
         {
-            Request = if pathParts.Length > 3 then pathParts.[pathParts.Length - 1] else ""
+            Request = if pathParts.Length > 0 then pathParts.[pathParts.Length - 1] else ""
             Path = getPath pathParts
             RawParameters = matches 
                             |> Seq.cast 
@@ -38,7 +38,7 @@ let create url =
     else 
         let pathParts = url |> getPathParts
         {
-            Request = if pathParts.Length > 3 then pathParts.[pathParts.Length - 1] else ""
+            Request = if pathParts.Length > 0 then pathParts.[pathParts.Length - 1] else ""
             Path = getPath pathParts
             RawParameters = Map.empty
         }

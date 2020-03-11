@@ -7,13 +7,13 @@ open System.Diagnostics
 let main argv =
 
     let urls = [ 
-        "http://localhost"
-        "http://localhost/index.html"
-        "http://localhost/web/index.html"
-        "http://localhost/web/styles/style.css"
-        "http://localhost/methods/query"
-        "http://localhost/app/methods/query" 
-        "http://localhost/app/methods/query?param=test&param2=67" ]
+        "/"
+        "/index.html"
+        "/web/index.html"
+        "/web/styles/style.css"
+        "/methods/query"
+        "/app/methods/query" 
+        "/app/methods/query?param=test&param2=67" ]
 
     let test url =
         let query = UrlQueryComponents.create url

@@ -31,9 +31,9 @@ let trimEnd chr (str: string) =
 /// <param name="chr">The separator</param>
 /// <param name="str">String to be splitted</param>
 /// <returns>The trimmed string</returns>
-let splitChar chr (str: string) =
+let splitChar (chr: char) (str: string) =
     if not (isNull str) then 
-        str.Split ([|chr|])
+        str.Split ([|chr|], StringSplitOptions.RemoveEmptyEntries)
     else
         [||]
 

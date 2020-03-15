@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     	<TargetFramework>netcoreapp3.1</TargetFramework>
-      	<Version>2.0.1</Version>
-      	<FileVersion>2.0.1.0</FileVersion>
-      	<AssemblyVersion>2.0.1.0</AssemblyVersion>
+      	<Version>2.2.1</Version>
+      	<FileVersion>2.2.1.0</FileVersion>
+      	<AssemblyVersion>2.2.1.0</AssemblyVersion>
     	<Authors>Uwe Riegel</Authors>
     	<Company>Uwe Riegel</Company>
     	<Description>Language extensions for F#</Description>
@@ -22,6 +22,7 @@
 
   	<ItemGroup>
 		<Compile Include="Dictionary.fs" />
+		<Compile Include="ActivePatterns.fs" />
 		<Compile Include="String.fs" />
 		<Compile Include="FileVersion.fs" />
 		<Compile Include="DateTime.fs" />

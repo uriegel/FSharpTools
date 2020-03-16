@@ -1,50 +1,26 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    	<TargetFramework>netcoreapp3.1</TargetFramework>
-      	<Version>2.2.1</Version>
-      	<FileVersion>2.2.1.0</FileVersion>
-      	<AssemblyVersion>2.2.1.0</AssemblyVersion>
-    	<Authors>Uwe Riegel</Authors>
-    	<Company>Uwe Riegel</Company>
-    	<Description>Language extensions for F#</Description>
-    	<PackageLicenseUrl></PackageLicenseUrl>
-    	<PackageProjectUrl>https://github.com/uriegel/FSharpTools</PackageProjectUrl>
-    	<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    	<PackageLicenseFile>LICENSE</PackageLicenseFile>
-	    <PackageTags>FSharp</PackageTags>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  	</PropertyGroup>
-
-  	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    	<DocumentationFile>FSharpTools.XML</DocumentationFile>
-  	</PropertyGroup>
-
-  	<ItemGroup>
-		<Compile Include="Dictionary.fs" />
-		<Compile Include="ActivePatterns.fs" />
-		<Compile Include="String.fs" />
-		<Compile Include="FileVersion.fs" />
-		<Compile Include="DateTime.fs" />
-		<Compile Include="SocketExtensions.fs" />
-		<Compile Include="Ipv6Listener.fs" />
-		<Compile Include="DisposableExtensions.fs" />
-		<Compile Include="EnumExtensions.fs" />
-		<Compile Include="Json.fs" />
-		<Compile Include="EnumerableExtensions.fs" />
-		<Compile Include="ExifReader.fs" />
-		<Compile Include="UrlQueryComponents.fs" />
-	</ItemGroup>
-
-  	<ItemGroup>
-    	<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-  	</ItemGroup>
-
-  	<ItemGroup>
-    	<None Include="..\LICENSE">
-      		<Pack>True</Pack>
-      		<PackagePath></PackagePath>
-    	</None>
-  	</ItemGroup>
-
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" />
+  <ItemGroup>
+    <Compile Include="Dictionary.fs" />
+    <Compile Include="ActivePatterns.fs" />
+    <Compile Include="String.fs" />
+    <Compile Include="FileVersion.fs" />
+    <Compile Include="DateTime.fs" />
+    <Compile Include="SocketExtensions.fs" />
+    <Compile Include="Ipv6Listener.fs" />
+    <Compile Include="DisposableExtensions.fs" />
+    <Compile Include="EnumExtensions.fs" />
+    <Compile Include="Json.fs" />
+    <Compile Include="EnumerableExtensions.fs" />
+    <Compile Include="ExifReader.fs" />
+    <Compile Include="UrlQueryComponents.fs" />
+    <None Include="../LICENSE" />
+    <Compile Include="Security.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
 </Project>

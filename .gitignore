@@ -260,3 +260,5 @@ paket-files/
 __pycache__/
 *.pyc
 .ionide/symbolCache.db
+
+.ionide

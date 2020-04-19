@@ -7,6 +7,7 @@ open Microsoft.FSharp.Reflection
 open Newtonsoft.Json
 open Newtonsoft.Json.Serialization
 open System.IO
+open Newtonsoft.Json.Linq
 
 let private defaultSettings = JsonSerializerSettings(ContractResolver = CamelCasePropertyNamesContractResolver(),
                                                 //defaultSettings.TypeNameHandling = TypeNameHandling.All
@@ -106,3 +107,24 @@ let deserializeStream<'T> = deserializeStreamImpl<'T> false
 /// <param name="stream">The stream to contain the result.</param>
 /// <returns>Deserialized object.</returns>
 let deserializeStreamWithOptions<'T> = deserializeStreamImpl<'T> true
+
+// TODO: UwebSocket Program.fs
+// TODO: commander-linux Settings.fs
+let serializeToBuffer a =     
+    use ms = new MemoryStream ()
+    serializeStream ms a
+    ms.Capacity <- int ms.Length
+    ms.GetBuffer ()
+
+// TODO: Commander-Linux Settings
+let jsonGet<'a> (json: JObject) key =
+    let token = json.[key]      
+    if isNull token then
+        None
+    else
+        Some (token.Value<'a> ())
+// TODO: Commander-Linux Settings
+let jsonGetDef<'a> (json: JObject) key (defaultValue: 'a) =
+    match jsonGet json key with
+    | Some v -> v
+    | None -> defaultValue

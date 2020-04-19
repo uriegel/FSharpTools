@@ -182,3 +182,6 @@ let toLowerInvariant (str: string) =
     else
         ""
 
+// TODO: commander-linux
+let icompare a b = 
+    System.String.Compare (a, b, System.StringComparison.CurrentCultureIgnoreCase)

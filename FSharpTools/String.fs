@@ -24,6 +24,18 @@ let trimEnd chr (str: string) =
     else 
         ""
 
+let endsWith (str: string) =
+    if not (isNull str) then 
+        str.EndsWith str
+    else 
+        false
+
+let endsWithComparison (str: string) (comparisonType: StringComparison) =        
+    if not (isNull str) then 
+        str.EndsWith (str, comparisonType)
+    else 
+        false
+   
 /// <summary>
 /// Splits a string into parts, separator is one char
 /// If the string is null, an emtpy array is returned
@@ -182,6 +194,5 @@ let toLowerInvariant (str: string) =
     else
         ""
 
-// TODO: commander-linux
 let icompare a b = 
     System.String.Compare (a, b, System.StringComparison.CurrentCultureIgnoreCase)

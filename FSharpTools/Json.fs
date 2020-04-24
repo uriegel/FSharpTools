@@ -19,6 +19,7 @@ let private defaultSettings = JsonSerializerSettings(ContractResolver = CamelCas
 /// <param name="obj">The object to serialize.</param>
 /// <returns>JSON serialized object as string.</returns>
 let serialize obj = JsonConvert.SerializeObject (obj, defaultSettings)
+let deserialize<'a> str = JsonConvert.DeserializeObject<'a> (str, defaultSettings)
 
 type OptionConverter() =
     inherit JsonConverter()
@@ -59,6 +60,7 @@ let private defaultSettingsWithOptions =
 /// <param name="obj">The object to serialize.</param>
 /// <returns>JSON serialized object as string.</returns>
 let serializeWithOptions obj = JsonConvert.SerializeObject (obj, defaultSettingsWithOptions)
+let deserializeWithOptions<'a> str = JsonConvert.DeserializeObject<'a> (str, defaultSettingsWithOptions)
 
 let private serializeStreamImpl withOptions (stream: Stream) a =
     let writer = new StreamWriter (stream)
@@ -108,23 +110,20 @@ let deserializeStream<'T> = deserializeStreamImpl<'T> false
 /// <returns>Deserialized object.</returns>
 let deserializeStreamWithOptions<'T> = deserializeStreamImpl<'T> true
 
-// TODO: UwebSocket Program.fs
-// TODO: commander-linux Settings.fs
 let serializeToBuffer a =     
     use ms = new MemoryStream ()
     serializeStream ms a
     ms.Capacity <- int ms.Length
     ms.GetBuffer ()
 
-// TODO: Commander-Linux Settings
-let jsonGet<'a> (json: JObject) key =
+let get<'a> (json: JObject) key =
     let token = json.[key]      
     if isNull token then
         None
     else
         Some (token.Value<'a> ())
-// TODO: Commander-Linux Settings
-let jsonGetDef<'a> (json: JObject) key (defaultValue: 'a) =
-    match jsonGet json key with
+
+let getDef<'a> (json: JObject) key (defaultValue: 'a) =
+    match get json key with
     | Some v -> v
     | None -> defaultValue

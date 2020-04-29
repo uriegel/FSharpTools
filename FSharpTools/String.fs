@@ -24,18 +24,30 @@ let trimEnd chr (str: string) =
     else 
         ""
 
-let endsWith (str: string) =
-    if not (isNull str) then 
-        str.EndsWith str
+let endsWith (strTest: string) (str: string) =
+    if not (isNull str) && not (isNull strTest) then 
+        str.EndsWith strTest
     else 
         false
 
-let endsWithComparison (str: string) (comparisonType: StringComparison) =        
-    if not (isNull str) then 
-        str.EndsWith (str, comparisonType)
+let endsWithComparison (strTest: string) (comparisonType: StringComparison) (str: string) =        
+    if not (isNull str) && not (isNull strTest) then 
+        str.EndsWith (strTest, comparisonType)
     else 
         false
    
+let startsWith (testStr: string) (str: string) =
+    if not (isNull testStr) && not (isNull str) then
+        str.StartsWith testStr
+    else
+        false
+
+let startsWithComparison (testStr: string) (comparisonType: StringComparison) (str: string) =
+    if not (isNull testStr) && not (isNull str) then
+        str.StartsWith (testStr, comparisonType)
+    else
+        false
+
 /// <summary>
 /// Splits a string into parts, separator is one char
 /// If the string is null, an emtpy array is returned
@@ -138,12 +150,6 @@ let substring2 pos length (str: string) =
     | _ -> str.Substring (pos, length)
 
 let join (chr: char) (strs: string seq) = String.Join (chr, strs)
-
-let startsWith (testStr: string) (str: string) =
-    if not (isNull testStr) && not (isNull str) then
-        str.StartsWith testStr
-    else
-        false
 
 let joinStr (sep: string) (strs: string seq) = String.Join (sep, strs)
 

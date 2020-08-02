@@ -116,6 +116,12 @@ let serializeToBuffer a =
     ms.Capacity <- int ms.Length
     ms.GetBuffer ()
 
+let serializeWithOptionsToBuffer a =     
+    use ms = new System.IO.MemoryStream ()
+    serializeStreamWithOptions ms a
+    ms.Capacity <- int ms.Length
+    ms.GetBuffer ()
+
 let get<'a> (json: JObject) key =
     let token = json.[key]      
     if isNull token then

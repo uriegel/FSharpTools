@@ -1,6 +1,7 @@
 module JsonTest
 open System
 open System.IO
+open FSharpTools
 
 type Contact = {
     Name: string

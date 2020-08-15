@@ -2,6 +2,7 @@
 
 open System
 open System.Diagnostics
+open FSharpTools
 
 JsonTest.deserializeTest ()    
 

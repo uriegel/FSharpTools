@@ -113,13 +113,13 @@ module Json =
 
     let serializeToBuffer a =     
         use ms = new MemoryStream ()
-        serializeStream ms a
+        serializeStream (ms :> Stream) a
         ms.Capacity <- int ms.Length
         ms.GetBuffer ()
 
     let serializeWithOptionsToBuffer a =     
         use ms = new System.IO.MemoryStream ()
-        serializeStreamWithOptions ms a
+        serializeStreamWithOptions (ms :> Stream) a
         ms.Capacity <- int ms.Length
         ms.GetBuffer ()
 

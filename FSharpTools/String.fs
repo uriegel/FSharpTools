@@ -143,12 +143,20 @@ module String =
     let substring pos (str: string) =
         match str with
         | null -> ""
-        | _ -> str.Substring pos
+        | _ -> 
+            let pos = max 0 pos
+            let pos = min pos (str.Length - 1)
+            str.Substring pos
 
     let substring2 pos length (str: string) =
         match str with
         | null -> ""
-        | _ -> str.Substring (pos, length)
+        | _ -> 
+            let pos = max 0 pos
+            let pos = min pos (str.Length - 1)
+            let length = max 0 length
+            let length = min length (str.Length - pos - 1)
+            str.Substring (pos, length)
 
     let join (chr: char) (strs: string seq) = String.Join (chr, strs)
 

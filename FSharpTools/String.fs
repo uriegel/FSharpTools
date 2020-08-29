@@ -141,22 +141,28 @@ module String =
             None
 
     let substring pos (str: string) =
-        match str with
-        | null -> ""
-        | _ -> 
-            let pos = max 0 pos
-            let pos = min pos (str.Length - 1)
-            str.Substring pos
+        try 
+            match str with
+            | null -> ""
+            | "" -> ""
+            | _ -> 
+                let pos = max 0 pos
+                let pos = min pos (str.Length - 1)
+                str.Substring pos
+        with _ -> ""
 
     let substring2 pos length (str: string) =
-        match str with
-        | null -> ""
-        | _ -> 
-            let pos = max 0 pos
-            let pos = min pos (str.Length - 1)
-            let length = max 0 length
-            let length = min length (str.Length - pos - 1)
-            str.Substring (pos, length)
+        try 
+            match str with
+            | null -> ""
+            | "" -> ""
+            | _ -> 
+                let pos = max 0 pos
+                let pos = min pos (str.Length - 1)
+                let length = max 0 length
+                let length = min length (str.Length - pos - 1)
+                str.Substring (pos, length)
+        with _ -> ""
 
     let join (chr: char) (strs: string seq) = String.Join (chr, strs)
 

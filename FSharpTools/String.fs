@@ -104,7 +104,7 @@ module String =
         else
             None
 
-    let indexOfCompare (part: string) (str: string) (comparisonType: StringComparison) =
+    let indexOfCompare (part: string) (comparisonType: StringComparison) (str: string) =
         if not (isNull str) then 
             let res = str.IndexOf (part, 0, comparisonType)
             match res with
@@ -113,7 +113,7 @@ module String =
         else
             None
 
-    let indexOfStartCompare (part: string) (startIndex: int) (str: string) (comparisonType: StringComparison) =
+    let indexOfStartCompare (part: string) (startIndex: int) (comparisonType: StringComparison) (str: string) =
         if not (isNull str) then 
             let res = str.IndexOf (part, startIndex, comparisonType)
             match res with

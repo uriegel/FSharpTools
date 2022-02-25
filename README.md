@@ -1,4 +1,4 @@
 # FSharpTools
 Language extensions for F#
 
-```dotnet build -c Release```
+Tools for F#, mostly functional extensions for .NET Objects

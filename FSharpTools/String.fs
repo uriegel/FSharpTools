@@ -190,7 +190,7 @@ module String =
                 str.Substring (pos, length)
         with _ -> ""
 
-    let join (chr: char) (strs: string seq) = String.Join (chr, strs)
+    let join (chr: char) (strs: string seq) = System.String.Join (String([|chr|]), strs)
 
     let joinStr (sep: string) (strs: string seq) = String.Join (sep, strs)
 

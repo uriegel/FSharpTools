@@ -3,10 +3,10 @@
     <OutputType>dll</OutputType>
     <AssemblyName>FSharpTools</AssemblyName>
     <OutputType>Library</OutputType>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>6.0.0</Version>
-    <FileVersion>6.0.0</FileVersion>
-    <AssemblyVersion>6.0.0.0</AssemblyVersion>
+    <TargetFramework>net6.0</TargetFramework>
+    <Version>6.1.0</Version>
+    <FileVersion>6.1.0</FileVersion>
+    <AssemblyVersion>6.1.0.0</AssemblyVersion>
     <Authors>Uwe Riegel</Authors>
     <Company>Uwe Riegel</Company>
     <Copyright>Uwe Riegel</Copyright>
@@ -14,13 +14,14 @@
     <PackageLicenseUrl>
     </PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/uriegel/FSharpTools</PackageProjectUrl>
-    <PackageReleaseNotes>Converted to .NET Standard, Railway Oriented Programming operators moved to Nuget Package 'FSharpRailway'</PackageReleaseNotes>
+    <PackageReleaseNotes>Process run</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>FSharp;F#;.NET;Functional</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>FS0067</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" />
   <PropertyGroup>
@@ -43,6 +44,7 @@
     <Compile Include="UrlQueryComponents.fs" />
     <None Include="../LICENSE" />
     <Compile Include="Security.fs" />
+    <Compile Include="Process.fs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" Pack="true" PackagePath="\" />

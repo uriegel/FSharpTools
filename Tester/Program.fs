@@ -1,8 +1,13 @@
-﻿// Learn more about F# at http://fsharp.org
-
-open System
-open System.Diagnostics
+﻿open System.Diagnostics
 open FSharpTools
+
+async {
+    let! result  = Process.run "ls" "-la"
+    let! result2 = Process.run "lsf" "-la"
+    let! result3 = Process.run "ls" "-Wrong"
+    ()
+} |> Async.RunSynchronously
+
 
 JsonTest.deserializeTest ()    
 

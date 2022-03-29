@@ -4,9 +4,9 @@
     <AssemblyName>FSharpTools</AssemblyName>
     <OutputType>Library</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <Version>6.1.0</Version>
-    <FileVersion>6.1.0</FileVersion>
-    <AssemblyVersion>6.1.0.0</AssemblyVersion>
+    <Version>6.2.0</Version>
+    <FileVersion>6.2.0</FileVersion>
+    <AssemblyVersion>6.2.0.0</AssemblyVersion>
     <Authors>Uwe Riegel</Authors>
     <Company>Uwe Riegel</Company>
     <Copyright>Uwe Riegel</Copyright>
@@ -31,12 +31,15 @@
     <Compile Include="Functional.fs" />
     <Compile Include="Dictionary.fs" />
     <Compile Include="ActivePatterns.fs" />
+    <Compile Include="Seq.fs" />
     <Compile Include="String.fs" />
     <Compile Include="FileVersion.fs" />
     <Compile Include="DateTime.fs" />
     <Compile Include="SocketExtensions.fs" />
     <Compile Include="Ipv6Listener.fs" />
     <Compile Include="DisposableExtensions.fs" />
+    <Compile Include="Stream.fs" />
+    <Compile Include="Directory.fs" />
     <Compile Include="EnumExtensions.fs" />
     <Compile Include="Json.fs" />
     <Compile Include="EnumerableExtensions.fs" />

@@ -243,3 +243,46 @@ module String =
 
     let icompare a b = 
         System.String.Compare (a, b, System.StringComparison.CurrentCultureIgnoreCase)
+
+    let parseInt (str: string) = 
+        match Int32.TryParse str with
+        | true, num -> Some num
+        | _         -> None
+
+    /// <summary>
+    /// Parses a string and returns an int if successful, otherwise returning a default value
+    /// </summary>
+    /// <param name="defaultValue">The default value to return if the string cannot be parsed successfully</param>
+    /// <returns>The parsed string or default value</returns>
+    let parseIntDef defaultValue = parseInt >> Option.defaultValue defaultValue
+
+    let parseInt64 (str: string) = 
+        match Int64.TryParse str with
+        | true, num -> Some num
+        | _         -> None
+
+    /// <summary>
+    /// Parses a string and returns an int if successful, otherwise returning a default value
+    /// </summary>
+    /// <param name="defaultValue">The default value to return if the string cannot be parsed successfully</param>
+    /// <returns>The parsed string or default value</returns>
+    let parseInt64Def defaultValue = parseInt64 >> Option.defaultValue defaultValue
+
+    /// <summary>
+    /// Counts characters in a sequence of character or string. 
+    /// </summary>
+    /// <param name="char">Character to count</param>
+    /// <param name="seq">Sequence (or string) containg the characters to be counted</param>
+    /// <returns>Number of occurrences of character 'char'</returns>
+    let getCharCount (char: Char) = Seq.getElementCount char
+
+    let retrieveEnvironmentVariable key =
+        let exceptionToOption func =
+            try
+                match func () with
+                | res when res <> null -> Some(res) 
+                | _                    -> None
+            with
+            | _ -> None
+
+        exceptionToOption (fun () -> System.Environment.GetEnvironmentVariable key)  

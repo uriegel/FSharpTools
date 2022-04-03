@@ -48,9 +48,9 @@ module Process =
     /// Runs a cmd returning a string
     /// </summary>
     /// <param name="cmd">Command (process name)</param>
-    /// <param name="args">Arguemtn list</param> 
+    /// <param name="args">Argument list</param> 
     /// <returns>Returned msg as string</returns>
-    let runCmd cmd args = 
+    let runCmd cmd = 
         let getStringFromResult (result: ProcessResult) = async { return result.Output.Value } 
-        let runCmd () = run cmd args
+        let runCmd = run cmd 
         runCmd >> getStringFromResult

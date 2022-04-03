@@ -4,9 +4,9 @@
     <AssemblyName>FSharpTools</AssemblyName>
     <OutputType>Library</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <Version>6.3.0</Version>
-    <FileVersion>6.3.0</FileVersion>
-    <AssemblyVersion>6.3.0.0</AssemblyVersion>
+    <Version>6.3.1</Version>
+    <FileVersion>6.3.1</FileVersion>
+    <AssemblyVersion>6.3.1.0</AssemblyVersion>
     <Authors>Uwe Riegel</Authors>
     <Company>Uwe Riegel</Company>
     <Copyright>Uwe Riegel</Copyright>
@@ -14,7 +14,7 @@
     <PackageLicenseUrl>
     </PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/uriegel/FSharpTools</PackageProjectUrl>
-    <PackageReleaseNotes>FSharpRailway using functions included</PackageReleaseNotes>
+    <PackageReleaseNotes>Bug in runCmd, unnecessary unit param</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>

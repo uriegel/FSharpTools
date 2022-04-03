@@ -1,6 +1,7 @@
 namespace FSharpTools
-module Process = 
 
+module Process = 
+    open FSharpRailway
     open System
     open System.Threading
 
@@ -33,17 +34,23 @@ module Process =
                     Exception = None
                 }
             with
-                | :? Exception as e -> return {
+                | e -> return {
                         Output = None
                         Error = None
                         ExitCode = None
                         Exception = Some e
                     }
-                | _ as e -> return {
-                        Output = None
-                        Error = None
-                        ExitCode = None
-                        Exception = Some (Exception(e.ToString()))
-                    }
         }
-        
+
+    open Async
+
+    /// <summary>
+    /// Runs a cmd returning a string
+    /// </summary>
+    /// <param name="cmd">Command (process name)</param>
+    /// <param name="args">Arguemtn list</param> 
+    /// <returns>Returned msg as string</returns>
+    let runCmd cmd args = 
+        let getStringFromResult (result: ProcessResult) = async { return result.Output.Value } 
+        let runCmd () = run cmd args
+        runCmd >> getStringFromResult

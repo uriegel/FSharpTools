@@ -4,9 +4,9 @@
     <AssemblyName>FSharpTools</AssemblyName>
     <OutputType>Library</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <Version>6.2.0</Version>
-    <FileVersion>6.2.0</FileVersion>
-    <AssemblyVersion>6.2.0.0</AssemblyVersion>
+    <Version>6.3.0</Version>
+    <FileVersion>6.3.0</FileVersion>
+    <AssemblyVersion>6.3.0.0</AssemblyVersion>
     <Authors>Uwe Riegel</Authors>
     <Company>Uwe Riegel</Company>
     <Copyright>Uwe Riegel</Copyright>
@@ -14,7 +14,7 @@
     <PackageLicenseUrl>
     </PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/uriegel/FSharpTools</PackageProjectUrl>
-    <PackageReleaseNotes>Process run</PackageReleaseNotes>
+    <PackageReleaseNotes>FSharpRailway using functions included</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -58,6 +58,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FSharpRailway" Version="0.3.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 </Project>

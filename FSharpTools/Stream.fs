@@ -3,6 +3,8 @@ module Stream =
 
     open System
     open System.IO
+    open FSharpRailway
+    open Result
 
     /// <summary>
     /// Creates a file stream
@@ -10,10 +12,8 @@ module Stream =
     /// <param name="path">Path to the file stream to create</param>
     /// <returns>Result of Stream or Exception if it fails</returns>
     let create path = 
-        try 
-            Ok (File.Create (path) :> IO.Stream)
-        with
-        | e -> Error e
+        let fileCreate () = File.Create path :> IO.Stream
+        exceptionToResult fileCreate
 
     /// <summary>
     /// Opens a file stream in read mode
@@ -21,7 +21,5 @@ module Stream =
     /// <param name="path">Path to the file stream to open</param>
     /// <returns>Result of Stream or Exception if it fails</returns>
     let openRead path = 
-        try 
-            Ok (File.OpenRead (path) :> IO.Stream)
-        with
-        | e -> Error e
+        let fileOpen () = File.OpenRead path :> IO.Stream
+        exceptionToResult fileOpen

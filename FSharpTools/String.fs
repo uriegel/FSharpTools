@@ -1,6 +1,9 @@
 ﻿namespace FSharpTools
+
 module String = 
     open System
+    open FSharpRailway
+    open Option
 
     let trim (str: string) =
         match str with
@@ -277,12 +280,4 @@ module String =
     let getCharCount (char: Char) = Seq.getElementCount char
 
     let retrieveEnvironmentVariable key =
-        let exceptionToOption func =
-            try
-                match func () with
-                | res when res <> null -> Some(res) 
-                | _                    -> None
-            with
-            | _ -> None
-
         exceptionToOption (fun () -> System.Environment.GetEnvironmentVariable key)  

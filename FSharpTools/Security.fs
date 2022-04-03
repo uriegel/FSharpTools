@@ -2,6 +2,9 @@ namespace FSharpTools
 module Security = 
     open System
     open System.Runtime.InteropServices
+    open System.Security.Cryptography.X509Certificates
+    open FSharpRailway
+    open Option
 
     let readPasswd () =
         let rec readKey charList =
@@ -33,3 +36,7 @@ module Security =
             Marshal.PtrToStringUni valuePtr
         finally 
             Marshal.ZeroFreeGlobalAllocUnicode valuePtr
+
+    let getCertificateFromFile certPath keyPath =
+        let createFromPem () = X509Certificate2.CreateFromPemFile (certPath, keyPath)
+        exceptionToOption createFromPem

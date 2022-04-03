@@ -4,7 +4,8 @@ module Directory =
     open System
     open System.IO
 
-    open Functional
+    open FSharpRailway
+    open Result
 
     /// <summary>
     /// </summary>
@@ -13,15 +14,21 @@ module Directory =
     let combinePathes pathes = Path.Combine pathes
 
     /// <summary>
+    /// Combines two pathes, for Railway oriented programming and partial application
+    /// </summary>
+    /// <param name="subpath">First part of the path</param>
+    /// <param name="path">Second part of the path</param> 
+    /// <returns>Combined path</returns>
+    let combine2Pathes subPath path = [| subPath; path |] |> combinePathes
+
+    /// <summary>
     /// Creates a directory
     /// </summary>
     /// <param name="path">Path to directory to create</param>
     /// <returns>Result of DirectoryInfo or Exception if it fails</returns>
     let create path = 
-        try
-            Ok (Directory.CreateDirectory path)
-        with
-        | e -> Error(e)
+        let create () = Directory.CreateDirectory path
+        exceptionToResult create
 
     /// <summary>
     /// Retrieves a directory usable for saving configuration.
@@ -37,3 +44,31 @@ module Directory =
             application
         |] |> combinePathes 
 
+    let getFiles path = 
+        let getFiles () = DirectoryInfo(path).GetFiles()
+        exceptionToResult getFiles
+
+    let getDirectories path = 
+        let getDirs () = DirectoryInfo(path).GetDirectories()
+        exceptionToResult getDirs
+
+    /// <summary>
+    /// Retrieves FileSystemInfos for the specified path, first Infos of directories, then infos of files.
+    /// </summary>
+    let getFileSystemInfos path = 
+        let getAsInfo n = n :> FileSystemInfo
+        let getFiles path = DirectoryInfo(path).GetFiles() |> Array.map getAsInfo
+        let getDirectories path = DirectoryInfo(path).GetDirectories() |> Array.map getAsInfo
+        let getFileSystemInfos path = Array.concat [|getDirectories path; getFiles path |] 
+        exceptionToResult (fun () -> getFileSystemInfos path)
+
+    let existsFile file = File.Exists file    
+
+    let existsDirectory path = Directory.Exists path
+
+    /// <summary>
+    /// Returns the name of the existing file, otherwise None
+    /// </summary>
+    let getExistingFile file = if existsFile file then Some file else None 
+
+    

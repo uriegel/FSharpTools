@@ -71,4 +71,6 @@ module Directory =
     /// </summary>
     let getExistingFile file = if existsFile file then Some file else None 
 
-    
+    let move (sourcePath: string, targetPath: string) = 
+        let move () = Directory.Move (sourcePath, targetPath)
+        exceptionToResult move

@@ -16,10 +16,18 @@ module Directory =
     /// <summary>
     /// Combines two pathes, for Railway oriented programming and partial application
     /// </summary>
-    /// <param name="subpath">First part of the path</param>
-    /// <param name="path">Second part of the path</param> 
+    /// <param name="path">First part of the path</param>
+    /// <param name="subpath">Second part of the path</param> 
     /// <returns>Combined path</returns>
-    let combine2Pathes subPath path = [| subPath; path |] |> combinePathes
+    let combine2Pathes path subPath = [| path; subPath |] |> combinePathes
+
+    /// <summary>
+    /// Combines two pathes, for Railway oriented programming and partial application
+    /// </summary>
+    /// <param name="subpath">Second part of the path</param>
+    /// <param name="path">First part of the path</param> 
+    /// <returns>Combined path</returns>
+    let attachSubPath subPath path = [| path; subPath |] |> combinePathes
 
     /// <summary>
     /// Creates a directory

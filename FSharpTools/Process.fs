@@ -51,6 +51,6 @@ module Process =
     /// <param name="args">Argument list</param> 
     /// <returns>Returned msg as string</returns>
     let runCmd cmd = 
-        let getStringFromResult (result: ProcessResult) = async { return result.Output.Value } 
+        let getStringFromResult (result: ProcessResult) = async { return result.Output |> Option.defaultValue "" } 
         let runCmd = run cmd 
         runCmd >> getStringFromResult

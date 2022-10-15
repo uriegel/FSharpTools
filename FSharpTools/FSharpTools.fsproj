@@ -4,9 +4,9 @@
     <AssemblyName>FSharpTools</AssemblyName>
     <OutputType>Library</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <Version>6.4.1</Version>
-    <FileVersion>6.4.1</FileVersion>
-    <AssemblyVersion>6.4.1.0</AssemblyVersion>
+    <Version>7.0.0</Version>
+    <FileVersion>7.0.0</FileVersion>
+    <AssemblyVersion>7.0.0.0</AssemblyVersion>
     <Authors>Uwe Riegel</Authors>
     <Company>Uwe Riegel</Company>
     <Copyright>Uwe Riegel</Copyright>
@@ -14,7 +14,7 @@
     <PackageLicenseUrl>
     </PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/uriegel/FSharpTools</PackageProjectUrl>
-    <PackageReleaseNotes>memoize now thread safe</PackageReleaseNotes>
+    <PackageReleaseNotes>runCmd and asyncRunCmd</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -28,6 +28,7 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="TextJson.fs" />
     <Compile Include="Functional.fs" />
     <Compile Include="Dictionary.fs" />
     <Compile Include="ActivePatterns.fs" />

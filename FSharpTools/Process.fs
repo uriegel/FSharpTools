@@ -13,6 +13,34 @@ module Process =
     }
 
     let run fileName args = 
+        try 
+            use proc = new Diagnostics.Process() 
+            proc.StartInfo <- Diagnostics.ProcessStartInfo()
+            proc.StartInfo.RedirectStandardOutput <- true
+            proc.StartInfo.RedirectStandardError <- true
+            proc.StartInfo.FileName <- fileName
+            proc.StartInfo.Arguments <- args
+            proc.StartInfo.CreateNoWindow <- true
+
+            proc.Start() |> ignore
+            proc.WaitForExit -1 |> ignore
+            let responseString = proc.StandardOutput.ReadToEnd () 
+            let errorString = proc.StandardError.ReadToEnd ()
+            {
+                Output = if responseString.Length > 0 then Some responseString else None
+                Error = if errorString.Length > 0 then Some errorString else None
+                ExitCode = Some proc.ExitCode
+                Exception = None
+            }
+        with
+            | e -> {
+                    Output = None
+                    Error = None
+                    ExitCode = None
+                    Exception = Some e
+                }
+
+    let asyncRun fileName args = 
         async {
             try 
                 use proc = new Diagnostics.Process() 
@@ -42,6 +70,17 @@ module Process =
                     }
         }
 
+    /// <summary>
+    /// Runs a cmd returning a string
+    /// </summary>
+    /// <param name="cmd">Command (process name)</param>
+    /// <param name="args">Argument list</param> 
+    /// <returns>Returned msg as string</returns>
+    let runCmd cmd = 
+        let getStringFromResult (result: ProcessResult) = result.Output |> Option.defaultValue ""  
+        let runCmd = run cmd 
+        runCmd >> getStringFromResult
+
     open Async
 
     /// <summary>
@@ -50,7 +89,7 @@ module Process =
     /// <param name="cmd">Command (process name)</param>
     /// <param name="args">Argument list</param> 
     /// <returns>Returned msg as string</returns>
-    let runCmd cmd = 
+    let asyncRunCmd cmd = 
         let getStringFromResult (result: ProcessResult) = async { return result.Output |> Option.defaultValue "" } 
-        let runCmd = run cmd 
+        let runCmd = asyncRun cmd 
         runCmd >> getStringFromResult

@@ -9,7 +9,7 @@ module Json =
     open Newtonsoft.Json.Serialization
     open System.IO
     open Newtonsoft.Json.Linq
-
+    
     let private defaultSettings = JsonSerializerSettings(ContractResolver = CamelCasePropertyNamesContractResolver(),
                                                     //defaultSettings.TypeNameHandling = TypeNameHandling.All
                                                     DefaultValueHandling = DefaultValueHandling.Ignore)

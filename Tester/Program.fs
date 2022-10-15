@@ -2,9 +2,9 @@
 open FSharpTools
 
 async {
-    let! result  = Process.run "ls" "-la"
-    let! result2 = Process.run "lsf" "-la"
-    let! result3 = Process.run "ls" "-Wrong"
+    let! result  = Process.asyncRun "ls" "-la"
+    let! result2 = Process.asyncRun "lsf" "-la"
+    let! result3 = Process.asyncRun "ls" "-Wrong"
     ()
 } |> Async.RunSynchronously
 

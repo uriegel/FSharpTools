@@ -3,7 +3,6 @@ module Security =
     open System
     open System.Runtime.InteropServices
     open System.Security.Cryptography.X509Certificates
-    open FSharpRailway
     open Option
 
     let readPasswd () =

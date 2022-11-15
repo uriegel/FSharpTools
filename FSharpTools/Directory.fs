@@ -4,7 +4,6 @@ module Directory =
     open System
     open System.IO
 
-    open FSharpRailway
     open Result
 
     /// <summary>

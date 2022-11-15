@@ -84,3 +84,9 @@ module Option =
                 return Some s
             | None -> return None
         }
+
+        let iter action option = async {
+            match option with
+            | Some o -> do! action o
+            | None        -> ()
+        }

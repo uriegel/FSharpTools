@@ -258,6 +258,12 @@ module String =
         | true, num -> Some num
         | _         -> None
 
+    let parseBool (str: string) = 
+        match str |> toLowerInvariant with
+        | "true"  -> Some true
+        | "false" -> Some false
+        | _       -> None
+
     /// <summary>
     /// Counts characters in a sequence of character or string. 
     /// </summary>

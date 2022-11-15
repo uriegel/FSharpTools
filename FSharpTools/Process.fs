@@ -1,7 +1,6 @@
 namespace FSharpTools
 
 module Process = 
-    open FSharpRailway
     open System
     open System.Threading
 

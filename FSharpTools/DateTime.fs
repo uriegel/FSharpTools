@@ -5,7 +5,7 @@ module DateTime =
     open System
     open System.Globalization
 
-    open FSharpTools.Deprecated
+    open FSharpTools
 
     /// <summary>
     /// Active Pattern: parses a dateTimeString using a pattern

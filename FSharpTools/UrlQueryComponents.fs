@@ -4,7 +4,7 @@ module UrlQueryComponents =
     open System
     open System.Text.RegularExpressions
     
-    open FSharpTools.Deprecated
+    open FSharpTools
 
     let private urlParameterRegex = Regex (@"(?<key>[^&?]*?)=(?<value>[^&?]*)", RegexOptions.Compiled)
 

@@ -36,7 +36,7 @@
     <Compile Include="Dictionary.fs" />
     <Compile Include="ActivePatterns.fs" />
     <Compile Include="Seq.fs" />
-    <Compile Include="StringDeprecated.fs" />
+    <Compile Include="String.fs" />
     <Compile Include="FileVersion.fs" />
     <Compile Include="DateTime.fs" />
     <Compile Include="SocketExtensions.fs" />

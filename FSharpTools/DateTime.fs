@@ -1,8 +1,11 @@
 ﻿namespace FSharpTools
+
 module DateTime =
 
     open System
     open System.Globalization
+
+    open FSharpTools.Deprecated
 
     /// <summary>
     /// Active Pattern: parses a dateTimeString using a pattern

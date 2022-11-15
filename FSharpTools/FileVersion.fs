@@ -5,6 +5,8 @@ module FileVersion =
     open System.Collections.Generic
     open System.Diagnostics
 
+    open FSharpTools.Deprecated
+
     /// <summary>
     /// Checks if the FileVersionInfo is valid
     /// </summary>

@@ -1,8 +1,8 @@
-﻿namespace FSharpTools
+﻿namespace FSharpTools.Deprecated
 
 module String = 
     open System
-    open FSharpRailway
+    open FSharpTools
     open Option
 
     let trim (str: string) =

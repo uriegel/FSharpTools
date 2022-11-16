@@ -4,9 +4,9 @@
     <AssemblyName>FSharpTools</AssemblyName>
     <OutputType>Library</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <Version>8.0.0</Version>
-    <FileVersion>8.0.0</FileVersion>
-    <AssemblyVersion>8.0.0.0</AssemblyVersion>
+    <Version>8.1.1</Version>
+    <FileVersion>8.1.1</FileVersion>
+    <AssemblyVersion>8.1.1.0</AssemblyVersion>
     <Authors>Uwe Riegel</Authors>
     <Company>Uwe Riegel</Company>
     <Copyright>Uwe Riegel</Copyright>
@@ -14,7 +14,7 @@
     <PackageLicenseUrl>
     </PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/uriegel/FSharpTools</PackageProjectUrl>
-    <PackageReleaseNotes>Combined with FSharpRailway</PackageReleaseNotes>
+    <PackageReleaseNotes>Namespaces for async option and async result changed</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -31,7 +31,9 @@
     <Compile Include="Async.fs" />
     <Compile Include="TextJson.fs" />
     <Compile Include="Result.fs" />
+    <Compile Include="AsyncResult.fs" />
     <Compile Include="Option.fs" />
+    <Compile Include="AsyncOption.fs" />
     <Compile Include="Functional.fs" />
     <Compile Include="Dictionary.fs" />
     <Compile Include="ActivePatterns.fs" />

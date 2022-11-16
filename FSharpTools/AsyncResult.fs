@@ -1,14 +1,47 @@
 namespace FSharpTools
 
-module Result =
+module AsyncResult =
+    /// <summary>
+    /// Binds the Ok value by calling function f, leaving the Err value
+    /// <param name="f">function with one input parameter 'a returning 'b</param>
+    /// <param name="x">input parameter Result&lt;'a&gt;</param>
+    /// <returns>Result&lt;'b&gt;</returns>
+    let bind f x = async {
+        match! x with
+        | Ok s    -> return! f s
+        | Error e -> return Error e
+    }
+
     /// <summary>
     /// Bind operator for composing functions returning Result values (Railway Oriented Programming).
     /// </summary>
     /// <param name="binder">function with one input parameter 'a returning an Result&lt;'b&gt;</param>
     /// <param name="x">input parameter 'a</param>
     /// <returns>Result&lt;'b&gt;</returns>
-    let (>>=) x binder = Result.bind binder x
+    let (>>=) x binder = bind binder x
 
+    /// <summary>
+    /// Maps the Ok value by  calling function f, leaving the Err value
+    /// Asynchronous version
+    /// <param name="f">function with one input parameter 'a returning 'b</param>
+    /// <param name="x">input parameter Result&lt;'a&gt;</param>
+    /// <returns>Result&lt;'b&gt;</returns>
+    let map f x = async {
+        match! x with
+        | Ok y ->
+            let! s = f y
+            return Ok s
+        | Error e -> return Error e
+    }
+
+    /// <summary>
+    /// Map operator for composing functions returning Result values (Railway Oriented Programming).
+    /// </summary>
+    /// <param name="binder">function with one input parameter 'a returning an Result&lt;'b&gt;</param>
+    /// <param name="x">input parameter 'a</param>
+    /// <returns>Result&lt;'b&gt;</returns>
+    let (|>>) x f = map f x
+    
     /// <summary>
     /// Fish operator (Kleisli Category) for composing functions returning Result values (Railway Oriented Programming).
     /// </summary>
@@ -19,32 +52,17 @@ module Result =
     let (>=>) f1 f2 x = f1 x >>= f2
 
     /// <summary>
-    /// Helper function for composing functions with Fish operator with Result values (Railway Oriented Programming)
-    /// </summary>
-    /// <param name="f">function with one input parameter 'a returning 'b</param>
-    /// <param name="x">input parameter 'a</param>
-    /// <returns>Result&lt;'b&gt;</returns>
-    let switch f x = f x |> Ok 
-
-    /// <summary>
     /// Monad which takes a function which can throw an exception. The exception 
     /// or the result is wrapped in an Result<'a, exn>
     /// </summary>
     /// <param name="f">function with no input parameter () returning 'a</param>
     /// <returns>Result&lt;'a, exn&gt;</returns>
-    let exceptionToResult func =
-        try
-            Ok(func ()) 
-        with
-        | e -> Error e
+    let exceptionToResult = Result.exceptionToResult
 
     /// <summary>
     /// Raising an exception from a Result containing an error value, 
     /// otherwise returning the Ok value
     /// </summary>
     /// <param name="result">Result from which the error should be thrown as exception</param>
-    let throw result = 
-        match result with
-        | Ok value  -> value
-        | Error exn -> raise exn
+    let throw = Result.throw
 

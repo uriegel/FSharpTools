@@ -4,7 +4,6 @@
     <IsPackable>false</IsPackable>
     <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -17,17 +16,15 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="../FSharpTools/FSharpTools.fsproj">
       <Name>FSharpTools.fsproj</Name>
     </ProjectReference>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="JsonTest.fs" />
     <Compile Include="DebugTest.fs" />
+    <Compile Include="StringTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
-
 </Project>

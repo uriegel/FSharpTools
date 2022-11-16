@@ -4,9 +4,9 @@
     <AssemblyName>FSharpTools</AssemblyName>
     <OutputType>Library</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <Version>8.1.1</Version>
-    <FileVersion>8.1.1</FileVersion>
-    <AssemblyVersion>8.1.1.0</AssemblyVersion>
+    <Version>9.0.0</Version>
+    <FileVersion>9.0.1</FileVersion>
+    <AssemblyVersion>9.0.1.0</AssemblyVersion>
     <Authors>Uwe Riegel</Authors>
     <Company>Uwe Riegel</Company>
     <Copyright>Uwe Riegel</Copyright>
@@ -14,7 +14,7 @@
     <PackageLicenseUrl>
     </PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/uriegel/FSharpTools</PackageProjectUrl>
-    <PackageReleaseNotes>Namespaces for async option and async result changed</PackageReleaseNotes>
+    <PackageReleaseNotes>Newtonsoft.Json serialization removed!</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -47,7 +47,6 @@
     <Compile Include="Stream.fs" />
     <Compile Include="Directory.fs" />
     <Compile Include="EnumExtensions.fs" />
-    <Compile Include="Json.fs" />
     <Compile Include="EnumerableExtensions.fs" />
     <Compile Include="ExifReader.fs" />
     <Compile Include="UrlQueryComponents.fs" />
@@ -62,8 +61,5 @@
       <PackagePath>
       </PackagePath>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 </Project>

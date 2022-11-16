@@ -9,8 +9,6 @@ let run () = async {
     let! result3 = Process.asyncRun "ls" "-Wrong"
     ()
 
-    JsonTest.deserializeTest ()    
-
     let urls = [ 
         "/"
         "/index.html"

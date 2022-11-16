@@ -19,7 +19,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JsonTest.fs" />
     <Compile Include="DebugTest.fs" />
     <Compile Include="StringTests.fs" />
     <Compile Include="Program.fs" />

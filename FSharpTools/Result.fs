@@ -48,3 +48,12 @@ module Result =
         | Ok value  -> value
         | Error exn -> raise exn
 
+    /// <summary>
+    /// Maps an error value in Result to another error type
+    /// </summary>
+    let mapError f x = 
+        match x with
+        | Ok ok   -> Ok ok
+        | Error e -> Error <| f e
+            
+    

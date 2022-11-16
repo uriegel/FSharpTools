@@ -272,5 +272,25 @@ module String =
     /// <returns>Number of occurrences of character 'char'</returns>
     let getCharCount (char: Char) = Seq.getElementCount char
 
+    /// <summary>
+    /// Gets an environment variable if set, otherwise None
+    /// </summary>
+    /// <param name="key">Which environment variable shoud be retrieved?</param>
+    /// <returns>'Some environment variable' or None if not set</returns>
     let retrieveEnvironmentVariable key =
         exceptionToOption (fun () -> System.Environment.GetEnvironmentVariable key)  
+
+    /// <summary>
+    /// Returns a substring beween 2 strings 'startStr' and 'endStr'
+    /// </summary>
+    /// <param name="startStr">After this str the substring starts</param>
+    /// <param name="endStr">The substring ends before 'endStr'</param>
+    /// <param name="str">The string to be extracted</param>
+    /// <returns>'Some substring' between startStr and endStr or None</returns>
+    let subStringBetweenStrs startStr endStr str = 
+        let startIndex = str |> indexOf startStr
+        let endIndex   = str |> indexOfStart endStr (startIndex |> Option.defaultValue 0)
+        match startIndex, endIndex with
+        | Some s, Some e -> Some (str |> substring2 (s + (startStr |> String.length)) (e - s - (startStr |> String.length)))
+        | _                         -> None
+

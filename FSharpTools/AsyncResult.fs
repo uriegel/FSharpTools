@@ -66,3 +66,14 @@ module AsyncResult =
     /// <param name="result">Result from which the error should be thrown as exception</param>
     let throw = Result.throw
 
+    /// <summary>
+    /// Maps an error value in Result to another error type
+    /// </summary>
+    let mapError f x = async {
+        match! x with
+        | Ok ok -> return Ok ok
+        | Error e -> 
+            let err = f e
+            return Error err
+    }
+

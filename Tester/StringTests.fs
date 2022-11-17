@@ -11,6 +11,8 @@ type ClassDataBase(generator : obj [] seq) =
         member this.GetEnumerator() = 
             generator.GetEnumerator() :> System.Collections.IEnumerator
 
+// TODO test indexOf
+
 type subStringBetweenStrsTest () = 
     inherit ClassDataBase([ 
         [| "Start"; "End"; "A substring between the string Start<here is the content of the substring>End. This part is not to be considered."; Some "<here is the content of the substring>" |]

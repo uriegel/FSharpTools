@@ -57,7 +57,7 @@ module Result =
         | Error e -> Error <| f e
             
     /// <summary>
-    /// Running function returning Task&lt;'a&gt; and converting 'a' to Result&lt;'a,exn&gt;. If an exception occurs, it will be put in the Result
+    /// Running function returning 'a and converting 'a' to Result&lt;'a,exn&gt;. If an exception occurs, it will be put in the Result
     /// </summary>
     let catch (func: Unit->'a) = 
         try

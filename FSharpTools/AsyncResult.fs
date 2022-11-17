@@ -1,5 +1,10 @@
 namespace FSharpTools
 
+open System
+open System.Threading.Tasks
+
+open Async
+
 module AsyncResult =
     /// <summary>
     /// Binds the Ok value by calling function f, leaving the Err value
@@ -76,4 +81,34 @@ module AsyncResult =
             let err = f e
             return Error err
     }
+
+    /// <summary>
+    /// Running function returning Task&lt;'a&gt; and converting 'a' to Result&lt;'a,exn&gt;. If an exception occurs, it will be put in the Result
+    /// </summary>
+    let catch (asyncFunc: Unit->Task<'a>) = 
+        let toResult (task: Task<'a>) = 
+            let continueFrom ((ok: Result<'a, exn> -> Unit), _, _) = 
+                let continueWith (task: Task<'a>) =
+                    let result = 
+                        if task.IsCompletedSuccessfully then
+                            Ok task.Result
+                        elif task.IsFaulted && task.Exception.InnerException <> null then
+                            Error task.Exception.InnerException
+                        elif task.IsFaulted then
+                            Error task.Exception
+                        elif task.IsCanceled then
+                            Error <| TaskCanceledException ()
+                        else
+                            Error <| Exception ()
+                    ok result
+                task.ContinueWith continueWith 
+                |> ignore
+
+            Async.FromContinuations continueFrom
+        try
+            asyncFunc ()
+            |> toResult
+
+        with         
+            exn -> Error exn |> toAsync
 

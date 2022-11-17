@@ -23,26 +23,3 @@ module Async =
     let toAsync a = async {
         return a
     }
-
-    /// <summary>
-    /// Running Task&lt;'a&gt; and converting result to Result&lt;'a,exn&gt;. If an exception occurs, it will be put in the Result
-    /// </summary>
-    let toResult (task: Task<'a>) = 
-        let continueFrom ((ok: Result<'a, exn> -> Unit), _, _) = 
-            let continueWith (task: Task<'a>) =
-                let result = 
-                    if task.IsCompletedSuccessfully then
-                        Ok task.Result
-                    elif task.IsFaulted && task.Exception.InnerException <> null then
-                        Error task.Exception.InnerException
-                    elif task.IsFaulted then
-                        Error task.Exception
-                    elif task.IsCanceled then
-                        Error <| TaskCanceledException ()
-                    else
-                        Error <| Exception ()
-                ok result
-            task.ContinueWith continueWith 
-            |> ignore
-
-        Async.FromContinuations continueFrom

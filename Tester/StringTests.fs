@@ -12,6 +12,18 @@ type ClassDataBase(generator : obj [] seq) =
             generator.GetEnumerator() :> System.Collections.IEnumerator
 
 // TODO test indexOf
+type indexOfTest () = 
+    inherit ClassDataBase([ 
+        [| "Time is illmatic"; "ill"; Some 8 |]
+        [| "Time is illmatic"; ""; None |]
+        [| "Time is illmatic"; null; None |]
+        [| "Time is illmatic"; "Nas"; None |]
+        [| ""; "ill"; None |]
+        [| ""; ""; None |]
+        [| ""; null; None |]
+        [| null; ""; None |]
+        [| null; null; None |]
+    ])
 
 type subStringBetweenStrsTest () = 
     inherit ClassDataBase([ 
@@ -27,3 +39,7 @@ type StringTests(output: ITestOutputHelper) =
     [<ClassData(typeof<subStringBetweenStrsTest>)>]
     let subStringBetweenStrs (startStr, endStr, str, result) = 
         Assert.Equal(String.subStringBetweenStrs startStr endStr str, result)
+    [<Theory>]
+    [<ClassData(typeof<indexOfTest>)>]
+    let indexOf (str, part, result) = 
+        Assert.Equal(String.indexOf part str, result)

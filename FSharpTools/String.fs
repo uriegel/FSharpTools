@@ -116,7 +116,7 @@ module String =
             None
 
     let indexOf (part: string) (str: string) =
-        if not (isNull str) && not (isNull part) then 
+        if not (isNull str) && not (String.IsNullOrEmpty part) then 
             let res = str.IndexOf part
             match res with
             | -1 -> None
@@ -125,7 +125,7 @@ module String =
             None
 
     let indexOfStart (part: string) (startIndex: int) (str: string) =
-        if not (isNull str) && not (isNull part) then 
+        if not (isNull str) && not (String.IsNullOrEmpty part) then 
             let res = str.IndexOf (part, startIndex)
             match res with
             | -1 -> None
@@ -134,7 +134,7 @@ module String =
             None
 
     let indexOfCompare (part: string) (comparisonType: StringComparison) (str: string) =
-        if not (isNull str) && not (isNull part) then 
+        if not (isNull str) && not (String.IsNullOrEmpty part) then 
             let res = str.IndexOf (part, 0, comparisonType)
             match res with
             | -1 -> None
@@ -143,7 +143,7 @@ module String =
             None
 
     let indexOfStartCompare (part: string) (startIndex: int) (comparisonType: StringComparison) (str: string) =
-        if not (isNull str) && not (isNull part) then 
+        if not (isNull str) && not (String.IsNullOrEmpty part) then 
             let res = str.IndexOf (part, startIndex, comparisonType)
             match res with
             | -1 -> None

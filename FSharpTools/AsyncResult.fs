@@ -120,12 +120,12 @@ module AsyncResult =
     /// <param name="count">Max count the function is to be performed</param>
     /// <param name="funToRun">Function is to be executed returning Result</param>
     /// <returns>Asynchron result of the last executed function</returns>
-    let rec repeatOnErrorAsync (waitTime: TimeSpan) count funToRun = async {
+    let rec repeatOnError (waitTime: TimeSpan) count funToRun = async {
         let! res = funToRun ()
         match count, res with
         | 1, res -> return res
         | _, Ok ok         -> return Ok ok
         | _, Error _            -> 
             do! Async.Sleep (int waitTime.TotalMilliseconds)
-            return! repeatOnErrorAsync waitTime (count-1) funToRun
+            return! repeatOnError waitTime (count-1) funToRun
     }

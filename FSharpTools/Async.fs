@@ -1,8 +1,5 @@
 namespace FSharpTools
 
-open System
-open System.Threading.Tasks
-
 module Async = 
 
     /// <summary>

@@ -3,6 +3,7 @@ namespace FSharpTools
 module AsyncOption =
     /// <summary>
     /// Binds the Some value by calling function f
+    /// </summary>
     /// <param name="f">function with one input parameter 'a returning an option&lt;'b&gt;</param>
     /// <param name="x">input parameter 'a</param>
     /// <returns>option&lt;'b&gt;</returns>
@@ -13,8 +14,9 @@ module AsyncOption =
     }
 
     /// <summary>
-    /// Maps the Some value by  calling function f, leaving the None value
+    /// Maps the Some value by calling function f, leaving the None value
     /// Asynchronous version
+    /// </summary>
     /// <param name="f">function with one input parameter 'a returning 'b</param>
     /// <param name="x">input parameter option&lt;'a&gt;</param>
     /// <returns>option&lt;'b&gt;</returns>

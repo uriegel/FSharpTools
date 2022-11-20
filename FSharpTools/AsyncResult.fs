@@ -8,6 +8,7 @@ open Async
 module AsyncResult =
     /// <summary>
     /// Binds the Ok value by calling function f, leaving the Err value
+    /// </summary>
     /// <param name="f">function with one input parameter 'a returning 'b</param>
     /// <param name="x">input parameter Result&lt;'a&gt;</param>
     /// <returns>Result&lt;'b&gt;</returns>

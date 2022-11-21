@@ -19,6 +19,14 @@ module Option =
     let (>=>) f1 f2 x = f1 x >>= f2
 
     /// <summary>
+    /// Map operator for composing functions returning Option values (Railway Oriented Programming).
+    /// </summary>
+    /// <param name="f">function with one input parameter 'a returning an Option&lt;'b&gt;</param>
+    /// <param name="x">input parameter 'a</param>
+    /// <returns>Option&lt;'b&gt;</returns>
+    let (|>>) x f = Option.map f x
+
+    /// <summary>
     /// Helper function for composing functions with Fish operator with option (Railway Oriented Programming)
     /// </summary>
     /// <param name="f">function with one input parameter 'a returning 'b</param>

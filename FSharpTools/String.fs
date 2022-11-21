@@ -294,3 +294,5 @@ module String =
         | Some s, Some e -> Some (str |> substring2 (s + (startStr |> String.length)) (e - s - (startStr |> String.length)))
         | _                         -> None
 
+    let isEmpty str = 
+        String.IsNullOrEmpty str

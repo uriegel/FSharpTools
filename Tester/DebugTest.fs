@@ -16,8 +16,12 @@ open Option
 let runOptionTests () =
     let a = fromEven 23
     let b = fromEven 24
+    let addToEven (a: int) (b: int) = 
+        fromEven (a + b)
 
-    let rwo value =
+    let affe = addToEven 56
+
+    let rwo value = 
         value 
         |>> (+) 17
         |>> sprintf "%d"
@@ -26,8 +30,22 @@ let runOptionTests () =
 
     printfn "%s" <| rwo a
     printfn "%s" <| rwo b
-// TODO Railway oriented concatination with bind operator
-// TODO Railway oriented concatination with Kleisli operator
+
+    let erg1 = 
+        fromEven 40
+        >>= addToEven 90
+    let erg2 = 
+        fromEven 40
+        >>= addToEven 91
+    let erg3 = 
+        fromEven 41
+        >>= addToEven 91
+
+    let fromEvenAddToEven a = fromEven >=> addToEven a
+    let erg3 = fromEvenAddToEven 24 88
+    let erg4 = fromEvenAddToEven 24 83
+            
+    ()
 
 open Task
 // TODO Railway oriented concatination of functions returning Tasks 
@@ -40,7 +58,7 @@ let runTaskTests () =
 
     getString "test"
 
-// TODO Railway oriented concatination of optiontasks (with Task.Deleay)
+// TODO Railway oriented concatination of optiontasks 
 
 let run () = async {
     runOptionTests ()

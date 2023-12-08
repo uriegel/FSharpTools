@@ -4,8 +4,6 @@ open System.Diagnostics
 open FSharpTools
 open Option 
 
-type EvenInteger = option<int>
-
 let fromEven i = 
     if (i % 2) = 0 then
         Some i
@@ -16,11 +14,15 @@ let runTests () =
     let a = fromEven 23
     let b = fromEven 24
 
-    b 
-    |>> (+) 17
-    |> defaultValue 0
-    |> printf "%d" 
-    ()
+    let rwo value =
+        value 
+        |>> (+) 17
+        |>> sprintf "%d"
+        |>> (+) "Als Text: "
+        |> defaultValue "0"
+
+    printfn "%s" <| rwo a
+    printfn "%s" <| rwo b
 
 let run () = async {
     runTests ()

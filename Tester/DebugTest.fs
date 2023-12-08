@@ -1,6 +1,8 @@
 module DebugTest
 
 open System.Diagnostics
+open System.Threading.Tasks
+
 open FSharpTools
 open Option 
 
@@ -10,7 +12,7 @@ let fromEven i =
     else
         None
 
-let runTests () =
+let runOptionTests () =
     let a = fromEven 23
     let b = fromEven 24
 
@@ -23,17 +25,25 @@ let runTests () =
 
     printfn "%s" <| rwo a
     printfn "%s" <| rwo b
-
 // TODO Railway oriented concatination with bind operator
-
 // TODO Railway oriented concatination with Kleisli operator
 
-// TODO Railway oriented concatination of functions returning Tasks (with Task.Deleay)
+open Task
+// TODO Railway oriented concatination of functions returning Tasks 
+
+let runTaskTests () =
+    let getString (text: string) = 
+        Task.Delay 5000
+        |> toUnit 
+        |>> fun () -> text
+
+    getString "test"
 
 // TODO Railway oriented concatination of optiontasks (with Task.Deleay)
 
 let run () = async {
-    runTests ()
+    runOptionTests ()
+    let! res = runTaskTests () |> Async.AwaitTask
     System.Console.ReadLine () |> ignore
     let! result  = Process.asyncRun "ls" "-la"
     let! result2 = Process.asyncRun "lsf" "-la"

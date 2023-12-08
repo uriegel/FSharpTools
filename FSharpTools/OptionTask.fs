@@ -29,27 +29,27 @@ module OptionTask =
         opt.ContinueWith (fun (ta: optiontask<'a>) -> ta.Result |> Option.iter selector)
         |> ignore
 
-    /// <summary>
-    /// Bind operator for composing functions returning OptionTasks (Railway Oriented Programming).
-    /// </summary>
-    /// <param name="binder">function with one input parameter 'a returning an OptionTask&lt;'b&gt;</param>
-    /// <param name="x">input parameter 'a</param>
-    /// <returns>OptionTask&lt;'b&gt;</returns>
-    let (>>=) x binder = bind binder x
+    // /// <summary>
+    // /// Bind operator for composing functions returning OptionTasks (Railway Oriented Programming).
+    // /// </summary>
+    // /// <param name="binder">function with one input parameter 'a returning an OptionTask&lt;'b&gt;</param>
+    // /// <param name="x">input parameter 'a</param>
+    // /// <returns>OptionTask&lt;'b&gt;</returns>
+    // let (>>=) x binder = bind binder x
 
-    /// <summary>
-    /// Fish operator (Kleisli Category) for composing functions returning OptionTasks (Railway Oriented Programming).
-    /// </summary>
-    /// <param name="f1">function with one input parameter 'a returning an OptionTask&lt;'b&gt;</param>
-    /// <param name="f2">function with one input parameter 'b returning an OptionTask&lt;'c&gt;</param>
-    /// <param name="x">input parameter 'a</param>
-    /// <returns>function with one input parameter 'a returning an OptionTask&lt;'c&gt;</returns>
-    let (>=>) f1 f2 x = f1 x >>= f2
+    // /// <summary>
+    // /// Fish operator (Kleisli Category) for composing functions returning OptionTasks (Railway Oriented Programming).
+    // /// </summary>
+    // /// <param name="f1">function with one input parameter 'a returning an OptionTask&lt;'b&gt;</param>
+    // /// <param name="f2">function with one input parameter 'b returning an OptionTask&lt;'c&gt;</param>
+    // /// <param name="x">input parameter 'a</param>
+    // /// <returns>function with one input parameter 'a returning an OptionTask&lt;'c&gt;</returns>
+    // let (>=>) f1 f2 x = f1 x >>= f2
 
-    /// <summary>
-    /// Map operator for composing functions returning OptionTasks (Railway Oriented Programming).
-    /// </summary>
-    /// <param name="f">function with one input parameter 'a returning an OptionTask&lt;'b&gt;</param>
-    /// <param name="x">input parameter 'a</param>
-    /// <returns>OptionTask&lt;'b&gt;</returns>
-    let (|>>) x f = map f x
+    // /// <summary>
+    // /// Map operator for composing functions returning OptionTasks (Railway Oriented Programming).
+    // /// </summary>
+    // /// <param name="f">function with one input parameter 'a returning an OptionTask&lt;'b&gt;</param>
+    // /// <param name="x">input parameter 'a</param>
+    // /// <returns>OptionTask&lt;'b&gt;</returns>
+    // let (|>>) x f = map f x

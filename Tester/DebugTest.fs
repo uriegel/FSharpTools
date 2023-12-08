@@ -2,8 +2,59 @@ module DebugTest
 
 open System.Diagnostics
 open FSharpTools
+open Task
+open System.Threading.Tasks
+open Option
+open OptionTask
+open Functional
+
+let runTests () = 
+    let getString (text: string) = 
+        Task.Delay 10000
+        |> toUnit 
+        |>> fun () -> text
+
+    // getString "Hello"
+    // |>> fun b -> b + " Welt"
+    // |> iter (printfn "%s") 
+
+    let addStringAsync (ts: Task<string>) (str: string) = 
+        ts 
+        |>> fun s -> str + " " + s
+    
+    getString "Hello"
+        |> Task.bind (addStringAsync (getString "Wörld"))
+        |> Task.iter (printfn "%s") 
+
+    getString "Hello"
+        >>= addStringAsync (getString "Wörld👍")
+        |> Task.iter (printfn "%s") 
+
+    let getNullableString isNotNull = 
+        if isNotNull then "Not null" else null
+
+    let getOptionString = getNullableString >> ofObj
+
+    getOptionString true
+        |>> fun s -> "Ein string: " + s
+        |> iter (printfn "%s") 
+
+    // getOptionString false
+    //     |>> fun s -> "Ein string: " + s
+    //     |> iter (printfn "%s") 
+
+    let getOptionTaskString b = 
+        Task.Delay 10000
+        |> toUnit 
+        |>> fun () -> (getNullableString b) |> ofObj
+
+    getOptionTaskString true
+        |> map (fun s -> "Ein string (Task): " + s)
+        |> iter (printfn "Optiontask: %s") 
 
 let run () = async {
+    runTests ()
+    System.Console.ReadLine ()
     let! result  = Process.asyncRun "ls" "-la"
     let! result2 = Process.asyncRun "lsf" "-la"
     let! result3 = Process.asyncRun "ls" "-Wrong"

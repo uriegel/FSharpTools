@@ -1,30 +1,30 @@
 namespace FSharpTools
 
 module Option =
-    /// <summary>
-    /// Bind operator for composing functions returning Option values (Railway Oriented Programming).
-    /// </summary>
-    /// <param name="binder">function with one input parameter 'a returning an option&lt;'b&gt;</param>
-    /// <param name="x">input parameter 'a</param>
-    /// <returns>option&lt;'b&gt;</returns>
-    let (>>=) x binder = Option.bind binder x
+    // /// <summary>
+    // /// Bind operator for composing functions returning Option values (Railway Oriented Programming).
+    // /// </summary>
+    // /// <param name="binder">function with one input parameter 'a returning an option&lt;'b&gt;</param>
+    // /// <param name="x">input parameter 'a</param>
+    // /// <returns>option&lt;'b&gt;</returns>
+    // let (>>=) x binder = Option.bind binder x
 
-    /// <summary>
-    /// Fish operator (Kleisli Category) for composing functions returning Option values (Railway Oriented Programming).
-    /// </summary>
-    /// <param name="f1">function with one input parameter 'a returning an option&lt;'b&gt;</param>
-    /// <param name="f2">function with one input parameter 'b returning an option&lt;'c&gt;</param>
-    /// <param name="x">input parameter 'a</param>
-    /// <returns>function with one input parameter 'a returning an option&lt;'c&gt;</returns>
-    let (>=>) f1 f2 x = f1 x >>= f2
+    // /// <summary>
+    // /// Fish operator (Kleisli Category) for composing functions returning Option values (Railway Oriented Programming).
+    // /// </summary>
+    // /// <param name="f1">function with one input parameter 'a returning an option&lt;'b&gt;</param>
+    // /// <param name="f2">function with one input parameter 'b returning an option&lt;'c&gt;</param>
+    // /// <param name="x">input parameter 'a</param>
+    // /// <returns>function with one input parameter 'a returning an option&lt;'c&gt;</returns>
+    // let (>=>) f1 f2 x = f1 x >>= f2
 
-    /// <summary>
-    /// Map operator for composing functions returning Option values (Railway Oriented Programming).
-    /// </summary>
-    /// <param name="f">function with one input parameter 'a returning an Option&lt;'b&gt;</param>
-    /// <param name="x">input parameter 'a</param>
-    /// <returns>Option&lt;'b&gt;</returns>
-    let (|>>) x f = Option.map f x
+    // /// <summary>
+    // /// Map operator for composing functions returning Option values (Railway Oriented Programming).
+    // /// </summary>
+    // /// <param name="f">function with one input parameter 'a returning an Option&lt;'b&gt;</param>
+    // /// <param name="x">input parameter 'a</param>
+    // /// <returns>Option&lt;'b&gt;</returns>
+    // let (|>>) x f = Option.map f x
 
     /// <summary>
     /// Helper function for composing functions with Fish operator with option (Railway Oriented Programming)

@@ -17,6 +17,9 @@ open Functional
 //     static member inline Add1 (a: ^T) (b: ^T) =
 //         Add a b
 
+// TODO options operator |>> >=> >>=
+// TODO Task operator |>> >=> >>=
+
 
 type Ext = Ext
     with

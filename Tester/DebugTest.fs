@@ -4,7 +4,7 @@ open System.Diagnostics
 open FSharpTools
 open Task
 open System.Threading.Tasks
-open Option
+open Option 
 open OptionTask
 open Functional
     
@@ -18,6 +18,13 @@ open Functional
 //         Add a b
 
 
+type Ext = Ext
+    with
+        static member Bar (ext: Ext, flt: float) = 1.0 + flt
+        static member Bar (ext: Ext, i: int) = 1 + i
+
+let inline bar (x: ^a) = 
+    ((^b or ^a) : (static member Bar : ^b * ^a -> ^a) (Ext, x))
 
 type Affe(x: int) =
     member this.x = x
@@ -48,7 +55,7 @@ let inline check< ^T when ^T :
     else Some num
 
 let inline (+++) a b = Addiere2 a b
-
+let inline (~%) a = bar a 
 // let inline (~+++)< ^T when ^T : 
 //     (static member IsInfinity : ^T -> bool)> (num:^T) : option< ^T > =
 //     printfn "%s" "Bin drinne +++"
@@ -66,7 +73,13 @@ let runTests () =
     let erg2 = Addiere2 a b
     let erg3 = a +++ b
     let erg4 = c +++ d
+
+    let erg5 = bar 7.0
+    let erg6 = bar 45
     //let a = check 42.0 
+    let erg7 = % 4
+    let erg8 = %3.5
+    
     //val it : float option = Some(42)
     //let b = +++(1.0f / 0.0f) 
     //val it : float32 option = null
@@ -117,7 +130,7 @@ let runTests () =
 
 let run () = async {
     runTests ()
-    System.Console.ReadLine ()
+    System.Console.ReadLine () |> ignore
     let! result  = Process.asyncRun "ls" "-la"
     let! result2 = Process.asyncRun "lsf" "-la"
     let! result3 = Process.asyncRun "ls" "-Wrong"

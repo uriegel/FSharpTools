@@ -24,6 +24,14 @@ let runTests () =
     printfn "%s" <| rwo a
     printfn "%s" <| rwo b
 
+// TODO Railway oriented concatination with bind operator
+
+// TODO Railway oriented concatination with Kleisli operator
+
+// TODO Railway oriented concatination of functions returning Tasks (with Task.Deleay)
+
+// TODO Railway oriented concatination of optiontasks (with Task.Deleay)
+
 let run () = async {
     runTests ()
     System.Console.ReadLine () |> ignore

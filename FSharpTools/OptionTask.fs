@@ -15,10 +15,16 @@ module OptionTask =
                 |> Option.map selector)
 
     let bindNoTask (selector: 'a->Option<'b>) (opt: optiontask<'a>) : optiontask<'b> = 
-        opt.ContinueWith (fun (ta: optiontask<'a>) -> ta.Result |> Option.bind selector)    
+        if opt.IsCompleted then
+            Task.FromResult (opt.Result
+                |> Option.bind selector)
+        else            
+            opt.ContinueWith (fun (ta: optiontask<'a>) -> 
+                ta.Result 
+                |> Option.bind selector)    
         
     let bind (selector: 'a->optiontask<'b>) (opt: optiontask<'a>) : optiontask<'b> = 
-
+        // TODO task.isCompleted
         let cont (ta: optiontask<'a>): optiontask<'b> = 
 
             let a = ta.Result
@@ -30,8 +36,12 @@ module OptionTask =
         e.Unwrap()
 
     let iter (selector: 'a->unit) (opt: optiontask<'a>) = 
-        opt.ContinueWith (fun (ta: optiontask<'a>) -> ta.Result |> Option.iter selector)
-        |> ignore
+        if opt.IsCompleted then
+            Option.iter selector opt.Result
+            |> ignore
+        else
+            opt.ContinueWith (fun (ta: optiontask<'a>) -> ta.Result |> Option.iter selector)
+            |> ignore
 
     /// <summary>
     /// Bind operator for composing functions returning OptionTasks (Railway Oriented Programming).

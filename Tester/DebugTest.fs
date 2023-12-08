@@ -19,8 +19,6 @@ let runOptionTests () =
     let addToEven (a: int) (b: int) = 
         fromEven (a + b)
 
-    let affe = addToEven 56
-
     let rwo value = 
         value 
         |>> (+) 17

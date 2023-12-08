@@ -7,50 +7,113 @@ open System.Threading.Tasks
 open Option
 open OptionTask
 open Functional
+    
+// type Test< ^T when ^T : (static member Add : ^T -> ^T -> ^T)> = 
+//     static member Add (a: string) (b: string) =
+//         a + b
+//     static member Add (a: int) (b: int) =
+//         a + b
+    
+//     static member inline Add1 (a: ^T) (b: ^T) =
+//         Add a b
 
-let runTests () = 
-    let getString (text: string) = 
-        Task.Delay 10000
-        |> toUnit 
-        |>> fun () -> text
+
+
+type Affe(x: int) =
+    member this.x = x
+    static member Addiere (a: Affe, b: Affe) =
+        a.x + b.x
+
+type Schwein(x: int) =
+    member this.x = x
+    static member Addiere2 (a: Schwein) (b: Schwein) =
+        a.x + b.x
+    static member Addiere (a: Schwein, b: Schwein) =
+        a.x - b.x
+
+let inline Addiere< ^T when ^T : 
+    (static member Addiere : ^T * ^T -> int)> (a:^T, b:^T) : int =
+    printfn "%s" "Bin drinne"
+    (^T : (static member Addiere : ^T * ^T -> int) ( a, b))
+    
+let inline Addiere2< ^T when ^T :
+    (static member Addiere : ^T -> ^T -> int)> (a:^T)  (b:^T) : int =
+    printfn "%s" "Bin drinne"
+    (^T : (static member Addiere : ^T * ^T -> int) ( a, b))
+
+let inline check< ^T when ^T : 
+    (static member IsInfinity : ^T -> bool)> (num:^T) : option< ^T > =
+    printfn "%s" "Bin drinne"
+    if (^T : (static member IsInfinity : ^T -> bool) (num)) then None
+    else Some num
+
+let inline (+++) a b = Addiere2 a b
+
+// let inline (~+++)< ^T when ^T : 
+//     (static member IsInfinity : ^T -> bool)> (num:^T) : option< ^T > =
+//     printfn "%s" "Bin drinne +++"
+//     if (^T : (static member IsInfinity : ^T -> bool) (num)) then None
+//     else Some num
+
+//let (+++) = check
+
+let runTests () =
+    let a = Affe(3)
+    let b = Affe(4)
+    let c = Schwein(3)
+    let d = Schwein(4)
+    let erg = Addiere (a, b)
+    let erg2 = Addiere2 a b
+    let erg3 = a +++ b
+    let erg4 = c +++ d
+    //let a = check 42.0 
+    //val it : float option = Some(42)
+    //let b = +++(1.0f / 0.0f) 
+    //val it : float32 option = null
+    //let c = check (1 / 2)
+    () 
+    // let getString (text: string) = 
+    //     Task.Delay 10000
+    //     |> toUnit 
+    //     |>> fun () -> text
+
+    // // getString "Hello"
+    // // |>> fun b -> b + " Welt"
+    // // |> iter (printfn "%s") 
+
+    // let addStringAsync (ts: Task<string>) (str: string) = 
+    //     ts 
+    //     |>> fun s -> str + " " + s
+    
+    // getString "Hello"
+    //     |> Task.bind (addStringAsync (getString "Wörld"))
+    //     |> Task.iter (printfn "%s") 
 
     // getString "Hello"
-    // |>> fun b -> b + " Welt"
-    // |> iter (printfn "%s") 
+    //     >>= addStringAsync (getString "Wörld👍")
+    //     |> Task.iter (printfn "%s") 
 
-    let addStringAsync (ts: Task<string>) (str: string) = 
-        ts 
-        |>> fun s -> str + " " + s
-    
-    getString "Hello"
-        |> Task.bind (addStringAsync (getString "Wörld"))
-        |> Task.iter (printfn "%s") 
+    // let getNullableString isNotNull = 
+    //     if isNotNull then "Not null" else null
 
-    getString "Hello"
-        >>= addStringAsync (getString "Wörld👍")
-        |> Task.iter (printfn "%s") 
+    // let getOptionString = getNullableString >> ofObj
 
-    let getNullableString isNotNull = 
-        if isNotNull then "Not null" else null
-
-    let getOptionString = getNullableString >> ofObj
-
-    getOptionString true
-        |>> fun s -> "Ein string: " + s
-        |> iter (printfn "%s") 
-
-    // getOptionString false
+    // getOptionString true
     //     |>> fun s -> "Ein string: " + s
     //     |> iter (printfn "%s") 
 
-    let getOptionTaskString b = 
-        Task.Delay 10000
-        |> toUnit 
-        |>> fun () -> (getNullableString b) |> ofObj
+    // // getOptionString false
+    // //     |>> fun s -> "Ein string: " + s
+    // //     |> iter (printfn "%s") 
 
-    getOptionTaskString true
-        |> map (fun s -> "Ein string (Task): " + s)
-        |> iter (printfn "Optiontask: %s") 
+    // let getOptionTaskString b = 
+    //     Task.Delay 10000
+    //     |> toUnit 
+    //     |>> fun () -> (getNullableString b) |> ofObj
+
+    // getOptionTaskString true
+    //     |> map (fun s -> "Ein string (Task): " + s)
+    //     |> iter (printfn "Optiontask: %s") 
 
 let run () = async {
     runTests ()

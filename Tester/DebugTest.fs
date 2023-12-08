@@ -46,7 +46,6 @@ let runOptionTests () =
     ()
 
 open Task
-// TODO Railway oriented concatination of functions returning Tasks 
 
 let runTaskTests () =
     let getString (text: string) = 
@@ -54,8 +53,20 @@ let runTaskTests () =
         |> toUnit 
         |>> fun () -> text
 
-    getString "test"
+    let addString (a: string) =
+        Task.FromResult a 
+        |>> (fun a -> a + " is extended") 
 
+    let erg = 
+        getString "test"
+        |>> (fun a -> a + " + addition")
+        >>= addString
+
+    let getStringAdded = getString >=> addString
+    let erg1 = getStringAdded "Begin"
+
+    erg1
+    
 // TODO Railway oriented concatination of optiontasks 
 
 let run () = async {

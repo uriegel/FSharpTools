@@ -4,13 +4,14 @@ open System.Diagnostics
 open System.Threading.Tasks
 
 open FSharpTools
-open Option 
 
 let fromEven i = 
     if (i % 2) = 0 then
         Some i
     else
         None
+
+open Option 
 
 let runOptionTests () =
     let a = fromEven 23

@@ -3,16 +3,15 @@ module DebugTest
 open System.Diagnostics
 open System.Threading.Tasks
 
+open FSharpPlus
 open FSharpTools
+
 
 let fromEven i = 
     if (i % 2) = 0 then
         Some i
     else
         None
-
-open Option 
-
 let runOptionTests () =
     let a = fromEven 23
     let b = fromEven 24
@@ -24,7 +23,7 @@ let runOptionTests () =
         |>> (+) 17
         |>> sprintf "%d"
         |>> (+) "Als Text: "
-        |> defaultValue "0"
+        |> Option.defaultValue "0"
 
     printfn "%s" <| rwo a
     printfn "%s" <| rwo b
@@ -45,12 +44,10 @@ let runOptionTests () =
             
     ()
 
-open Task
-
 let runTaskTests () =
     let getString (text: string) = 
         Task.Delay 5000
-        |> toUnit 
+        |> Task.toUnit 
         |>> fun () -> text
 
     let addString (a: string) =

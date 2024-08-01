@@ -1,8 +1,9 @@
 namespace FSharpTools
+open System
+open System.Threading
+open FSharpPlus
 
 module Process = 
-    open System
-    open System.Threading
 
     type ProcessResult = {
         Output: string option
@@ -80,8 +81,6 @@ module Process =
         let runCmd = run cmd 
         runCmd >> getStringFromResult
 
-    open Async
-
     /// <summary>
     /// Runs a cmd returning a string
     /// </summary>
@@ -91,4 +90,4 @@ module Process =
     let asyncRunCmd cmd = 
         let getStringFromResult (result: ProcessResult) = async { return result.Output |> Option.defaultValue "" } 
         let runCmd = asyncRun cmd 
-        runCmd >> getStringFromResult
+        runCmd >=> getStringFromResult

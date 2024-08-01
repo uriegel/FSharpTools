@@ -13,12 +13,12 @@ module Ipv6Listener =
 
     let Create port = 
         try
-            let listener = TcpListener(IPAddress.IPv6Any, port)
+            let listener = new TcpListener(IPAddress.IPv6Any, port)
             listener.Server.SetDualMode ()
             { Listener = listener; Ipv6 = true }            
         with 
         | :? SocketException as se when se.SocketErrorCode = SocketError.AddressFamilyNotSupported
-            ->  let listener = TcpListener(IPAddress.Any, port) 
+            ->  let listener = new TcpListener(IPAddress.Any, port) 
                 {
                     Listener = listener
                     Ipv6 = false
@@ -27,7 +27,7 @@ module Ipv6Listener =
             -> raise se
         | :? SocketException as se        
             ->
-                let listener = TcpListener(IPAddress.Any, port)
+                let listener = new TcpListener(IPAddress.Any, port)
                 { Listener = listener; Ipv6 = false }            
             
 

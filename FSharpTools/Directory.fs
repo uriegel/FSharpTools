@@ -35,7 +35,7 @@ module Directory =
     /// <returns>Result of DirectoryInfo or Exception if it fails</returns>
     let create path = 
         let create () = Directory.CreateDirectory path
-        exceptionToResult create
+        catch create
 
     /// <summary>
     /// Retrieves a directory usable for saving configuration.
@@ -53,11 +53,11 @@ module Directory =
 
     let getFiles path = 
         let getFiles () = DirectoryInfo(path).GetFiles()
-        exceptionToResult getFiles
+        catch getFiles
 
     let getDirectories path = 
         let getDirs () = DirectoryInfo(path).GetDirectories()
-        exceptionToResult getDirs
+        catch getDirs
 
     /// <summary>
     /// Retrieves FileSystemInfos for the specified path, first Infos of directories, then infos of files.
@@ -67,7 +67,7 @@ module Directory =
         let getFiles path = DirectoryInfo(path).GetFiles() |> Array.map getAsInfo
         let getDirectories path = DirectoryInfo(path).GetDirectories() |> Array.map getAsInfo
         let getFileSystemInfos path = Array.concat [|getDirectories path; getFiles path |] 
-        exceptionToResult (fun () -> getFileSystemInfos path)
+        catch (fun () -> getFileSystemInfos path)
 
     let existsFile file = File.Exists file    
 
@@ -80,5 +80,5 @@ module Directory =
 
     let move (sourcePath: string, targetPath: string) = 
         let move () = Directory.Move (sourcePath, targetPath)
-        exceptionToResult move
+        catch move
 

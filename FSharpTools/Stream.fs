@@ -12,7 +12,7 @@ module Stream =
     /// <returns>Result of Stream or Exception if it fails</returns>
     let create path = 
         let fileCreate () = File.Create path :> IO.Stream
-        exceptionToResult fileCreate
+        catch fileCreate
 
     /// <summary>
     /// Opens a file stream in read mode
@@ -21,4 +21,4 @@ module Stream =
     /// <returns>Result of Stream or Exception if it fails</returns>
     let openRead path = 
         let fileOpen () = File.OpenRead path :> IO.Stream
-        exceptionToResult fileOpen
+        catch fileOpen

@@ -38,4 +38,4 @@ module Security =
 
     let getCertificateFromFile certPath keyPath =
         let createFromPem () = X509Certificate2.CreateFromPemFile (certPath, keyPath)
-        exceptionToOption createFromPem
+        catch createFromPem

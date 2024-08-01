@@ -278,7 +278,7 @@ module String =
     /// <param name="key">Which environment variable shoud be retrieved?</param>
     /// <returns>'Some environment variable' or None if not set</returns>
     let retrieveEnvironmentVariable key =
-        exceptionToOption (fun () -> System.Environment.GetEnvironmentVariable key)  
+        catch (fun () -> System.Environment.GetEnvironmentVariable key)  
 
     /// <summary>
     /// Returns a substring beween 2 strings 'startStr' and 'endStr'

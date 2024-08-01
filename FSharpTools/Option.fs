@@ -15,6 +15,25 @@ module Option =
         with
         | _ -> None
 
+    /// <summary>
+    /// Helper function for composing functions with Fish operator with option (Railway Oriented Programming)
+    /// </summary>
+    /// <param name="f">function with one input parameter 'a returning 'b</param>
+    /// <param name="x">input parameter 'a</param>
+    /// <returns>option&lt;'b&gt;</returns>
+    let switch f x = f x |> Some         
+
+    let withInputVar switch x = 
+        match switch x with
+        | Some s -> Some(x, s)
+        | None   -> None
+
+    let omitInputVar (_, b)  = Some(b)
+
+//     let OptionFrom2Options a b = 
+//         match a, b with
+//         | Some a, Some b -> Some (a, b)
+//         | _              -> None
 //     /// <summary>
 //     /// Bind operator for composing functions returning Option values (Railway Oriented Programming).
 //     /// </summary>
@@ -40,18 +59,6 @@ module Option =
 //     /// <returns>Option&lt;'b&gt;</returns>
 //     let (|>>) x f = Option.map f x
 
-//     /// <summary>
-//     /// Helper function for composing functions with Fish operator with option (Railway Oriented Programming)
-//     /// </summary>
-//     /// <param name="f">function with one input parameter 'a returning 'b</param>
-//     /// <param name="x">input parameter 'a</param>
-//     /// <returns>option&lt;'b&gt;</returns>
-//     let switch f x = f x |> Some         
-
-//     let OptionFrom2Options a b = 
-//         match a, b with
-//         | Some a, Some b -> Some (a, b)
-//         | _              -> None
 
 //     /// <summary>
 //     /// Maps the Error value of a Result to an option, discarding the Ok value
@@ -62,12 +69,6 @@ module Option =
 //         | Ok    _ -> None
 //         | Error u -> Some u
 
-//     let withInputVar switch x = 
-//         match switch x with
-//         | Some s -> Some(x, s)
-//         | None   -> None
-
-//     let omitInputVar (_, b)  = Some(b)
 
 //     let exceptionToOption func =
 //         try

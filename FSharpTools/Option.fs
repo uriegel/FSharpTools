@@ -30,6 +30,12 @@ module Option =
 
     let omitInputVar (_, b)  = Some(b)
 
+    let iterAsync action option = async {
+        match option with
+        | Some o -> do! action o
+        | None -> ()
+    }
+
 //     let OptionFrom2Options a b = 
 //         match a, b with
 //         | Some a, Some b -> Some (a, b)
@@ -78,8 +84,3 @@ module Option =
 //         with
 //         | _ -> None
 
-//     let iterAsync action option = async {
-//         match option with
-//         | Some o -> do! action o
-//         | None        -> ()
-//     }

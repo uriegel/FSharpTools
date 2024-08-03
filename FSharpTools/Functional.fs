@@ -3,14 +3,31 @@ namespace FSharpTools
 module Functional =
     open System
 
-    type Resetter() = 
+    type Resetter private (autoResetTimeSpan: option<TimeSpan>) = 
         let mutable action: (unit->unit) option = None
+
+        let reset () = 
+            if action.IsSome then action.Value()
+
+        let createTimer (span: TimeSpan) = 
+            let timer = new Timers.Timer (span)
+            let tick _ = 
+                printfn "Resette........................................"
+                reset ()
+            timer.Elapsed.Add tick
+            timer
+
+        let timer = 
+            autoResetTimeSpan
+            |> Option.map createTimer
+
+        new () = Resetter(None)
+        new (autoResetTimeSpan: TimeSpan) = Resetter(Some autoResetTimeSpan)
 
         member this.SetResetAction resetAction = 
             action <- Some resetAction
 
-        member this.Reset () = 
-            if action.IsSome then action.Value()
+        member this.Reset = reset
         
     type RefCell<'a> = {
         mutable Value: 'a option
@@ -27,29 +44,13 @@ module Functional =
         let memoization = System.Collections.Concurrent.ConcurrentDictionary<'a, 'b>()
         fun key -> memoization.GetOrAdd (key, func)
 
-    /// <summary>
-    /// Memoization. A function result is memoized if called for the first time. 
-    /// Subsequent calls always returns return the memoized value, not calling the function any more.
-    /// </summary>
-    /// <param name="f">function with no (unit) input parameter 'a returning 'b</param>
-    /// <returns>Memoized function with the same signature</returns>
-    let memoizeSingle funToMemoize =
-        let memoized = funToMemoize ()
-        fun () -> memoized
-
-    /// <summary>
-    /// Memoization. A function result is memoized if called for the first time. 
-    /// Subsequent calls always returns return the memoized value, not calling the function any more.
-    /// </summary>
-    /// <param name="funToMemoize">function with no (unit) input parameter 'a returning 'b</param>
-    /// <param name="resetter">A Resetter to reset the cached value</param>
-    /// <returns>Memoized function with the same signature</returns>
-    let memoizeSingleReset<'a> (funToMemoize: unit->'a) (resetter: Resetter) =
+    let private memoizeSingleOptionReset<'a> (funToMemoize: unit->'a) (resetter: Option<Resetter>) =
         let refCell = { 
             Value = None
             Valid = false   
         }
-        resetter.SetResetAction (fun () -> refCell.Valid <- false)
+        resetter
+        |> Option.iter (fun r -> r.SetResetAction (fun () -> refCell.Valid <- false))
         let locker = Object()
         fun () -> 
             if refCell.Valid then 
@@ -63,6 +64,24 @@ module Functional =
                         refCell.Valid <- true
                         refCell.Value.Value
                 )
+
+    /// <summary>
+    /// Memoization. A function result is memoized if called for the first time. 
+    /// Subsequent calls always returns return the memoized value, not calling the function any more.
+    /// </summary>
+    /// <param name="f">function with no (unit) input parameter 'a returning 'b</param>
+    /// <returns>Memoized function with the same signature</returns>
+    let memoizeSingle funToMemoize = memoizeSingleOptionReset funToMemoize None
+
+    /// <summary>
+    /// Memoization. A function result is memoized if called for the first time. 
+    /// Subsequent calls always returns return the memoized value, not calling the function any more.
+    /// </summary>
+    /// <param name="funToMemoize">function with no (unit) input parameter 'a returning 'b</param>
+    /// <param name="resetter">A Resetter to reset the cached value</param>
+    /// <returns>Memoized function with the same signature</returns>
+    let memoizeSingleReset<'a> (funToMemoize: unit->'a) (resetter: Resetter) =
+        memoizeSingleOptionReset funToMemoize (Some resetter)
             
     /// <summary>
     /// Helper function for composing functions (Railway Oriented Programming). 

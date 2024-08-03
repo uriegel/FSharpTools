@@ -11,10 +11,9 @@ module Functional =
 
         let createTimer (span: TimeSpan) = 
             let timer = new Timers.Timer (span)
-            let tick _ = 
-                printfn "Resette........................................"
-                reset ()
+            let tick _ =  reset ()
             timer.Elapsed.Add tick
+            timer.Start ()
             timer
 
         let timer = 

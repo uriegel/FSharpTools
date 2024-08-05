@@ -41,20 +41,36 @@ module AsyncResult =
                 return x
             } |> toAsyncResultAwait
 
+        static member mapError (f: 'e -> 'e1) (ar: AsyncResult<'a, 'e>) : AsyncResult<'a, 'e1> = 
+            async {
+                let! x = ar.value
+                let x = match x with
+                                | Ok ok -> Ok ok
+                                | Error err ->  Error <| f err
+                return x
+            } |> toAsyncResultAwait
+
+        static member bindToError (f: 'a -> Result<'a, 'e>) (ar: AsyncResult<'a, 'e>) : AsyncResult<'a, 'e> = 
+            async {
+                let! x = ar.value
+                let x = match x with
+                                | Ok ok -> f ok
+                                | Error err ->  Error err
+                return x
+            } |> toAsyncResultAwait
+
+        static member bindToOk (f: 'e -> Result<'a, 'e>) (ar: AsyncResult<'a, 'e>) : AsyncResult<'a, 'e> = 
+            async {
+                let! x = ar.value
+                let x = match x with
+                                | Ok ok -> Ok ok
+                                | Error err ->  f err
+                return x
+            } |> toAsyncResultAwait
+
         static member (>>=) ((ar: AsyncResult<'a, 'e>), (f: 'a -> AsyncResult<'b, 'e>)) = 
             ar |> (fun x ->  AsyncResult.bind f x)
 
-    //     /// <summary>
-    //     /// Binds the Ok value by calling function f, leaving the Err value
-    //     /// </summary>
-    //     /// <param name="f">function with one input parameter 'a returning 'b</param>
-    //     /// <param name="x">input parameter Result&lt;'a&gt;</param>
-    //     /// <returns>Result&lt;'b&gt;</returns>
-    //     let bind f x = async {
-    //         match! x with
-    //         | Ok s    -> return! f s
-    //         | Error e -> return Error e
-    //     }
 
     //     /// <summary>
     //     /// Bind operator for composing functions returning Result values (Railway Oriented Programming).
@@ -63,21 +79,6 @@ module AsyncResult =
     //     /// <param name="x">input parameter 'a</param>
     //     /// <returns>Result&lt;'b&gt;</returns>
     //     let (>>=) x binder = bind binder x
-
-    //     /// <summary>
-    //     /// Maps the Ok value by  calling function f, leaving the Err value.
-    //     /// Asynchronous version
-    //     /// </summary>
-    //     /// <param name="f">function with one input parameter 'a returning Async&lt;'b&gt;</param>
-    //     /// <param name="x">input parameter Async&lt;Result&lt;'a, 'c&gt;&gt;</param>
-    //     /// <returns>Async&lt;Result&lt;'b, 'c&gt;&gt;</returns>
-    //     let map f x = async {
-    //         match! x with
-    //         | Ok y ->
-    //             let! s = f y
-    //             return Ok s
-    //         | Error e -> return Error e
-    //     }
 
     //     /// <summary>
     //     /// Map operator for composing functions returning Result values (Railway Oriented Programming).

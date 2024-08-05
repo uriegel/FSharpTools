@@ -18,7 +18,10 @@ module AsyncResult =
             return 
                 match res with
                 | Choice1Of2 r -> Ok r
-                | Choice2Of2 e -> Error e
+                | Choice2Of2 e -> 
+                    match e with
+                    | :? AggregateException as ae when ae.InnerException <> null -> Error ae.InnerException
+                    | _ -> Error e
         } |> toAsyncResultAwait
 
 

@@ -5,6 +5,8 @@ module Directory =
     open System.IO
 
     open Result
+    open System.ComponentModel
+    open Functional
 
     /// <summary>
     /// </summary>
@@ -82,3 +84,13 @@ module Directory =
         let move () = Directory.Move (sourcePath, targetPath)
         catch move
 
+    /// <summary>
+    /// Returns the specified path to the directory, if it does not exists, it will be created
+    /// </summary>
+    /// <param name="path">path to the directory</param>
+    /// <returns>The path which now exists</returns>
+    let ensureExists path =
+        if existsDirectory path then
+            path
+        else
+            path |> sideEffect(System.IO.Directory.CreateDirectory)

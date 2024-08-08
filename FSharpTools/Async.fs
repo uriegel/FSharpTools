@@ -1,6 +1,17 @@
 namespace FSharpTools
+open System.Threading
 
-// module Async = 
+module Async = 
+    /// <summary>
+    /// Runs the async computation and continues in the given SynchronizationContext 
+    /// </summary>
+    let StartToContext (ctx: SynchronizationContext) task = 
+        ctx.Send((fun _ -> Async.StartImmediate(task)), null)
+
+    /// <summary>
+    /// Runs the async computation and continues in the current SynchronizationContext 
+    /// </summary>
+    let StartToCurrentContext = StartToContext SynchronizationContext.Current
 
 //     /// <summary>
 //     /// Function Compostion for 2 async functions

@@ -1,4 +1,5 @@
 namespace FSharpTools
+open System
 open System.Text.Json
 open System.Text.Json.Serialization
 
@@ -12,7 +13,8 @@ module TextJson =
         JsonSerializer.Serialize (a, options)    
 
     let deserializeWithOptions<'a> (options: JsonSerializerOptions) (str: string) = 
-        JsonSerializer.Deserialize<'a> (str, options)    
+        let json = if String.IsNullOrEmpty str = false then str else "{}"
+        JsonSerializer.Deserialize<'a> (json, options)    
 
     let serialize<'a> = serializeWithOptions<'a> Default
     let deserialize<'a> = deserializeWithOptions<'a> Default

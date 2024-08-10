@@ -1,9 +1,9 @@
 namespace FSharpTools
+open System
+open FSharpTools
+open Option
 
 module String = 
-    open System
-    open FSharpTools
-    open Option
 
     let trim (str: string) =
         match str with

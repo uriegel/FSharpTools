@@ -5,16 +5,15 @@ open System.Threading.Tasks
 
 open FSharpPlus
 open FSharpTools
-open System
 
-type Kontakt = {
-    Name: string
-    Number: int
+type Contact = {
+    Name: string option
+    Number: int option
 }
 
-let kontakt = {
-    Name = "Uwe Riegel"
-    Number = 89
+type FakeContact = {
+    FakeName: string option
+    FakeNumber: int option
 }
 
 let fromEven i = 
@@ -78,9 +77,15 @@ let runTaskTests () =
 
 let run () = async {
 
-    let x = TextJson.serialize kontakt
-    let k: Kontakt = TextJson.deserialize x
-
+    let x = TextJson.serialize { Name = Some "Uwe Riegel"; Number = Some 89 }
+    let k: FakeContact = TextJson.deserialize x
+    let k: FakeContact = TextJson.deserialize "{}"
+    printfn "%A" k
+    try 
+        TextJson.deserialize "nothing"
+    with
+    | e -> printfn "%A" e
+    
 
     runOptionTests ()
     let! res = runTaskTests () |> Async.AwaitTask

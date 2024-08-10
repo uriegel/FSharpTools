@@ -5,7 +5,17 @@ open System.Threading.Tasks
 
 open FSharpPlus
 open FSharpTools
+open System
 
+type Kontakt = {
+    Name: string
+    Number: int
+}
+
+let kontakt = {
+    Name = "Uwe Riegel"
+    Number = 89
+}
 
 let fromEven i = 
     if (i % 2) = 0 then
@@ -67,6 +77,11 @@ let runTaskTests () =
 // TODO Railway oriented concatination of optiontasks 
 
 let run () = async {
+
+    let x = TextJson.serialize kontakt
+    let k: Kontakt = TextJson.deserialize x
+
+
     runOptionTests ()
     let! res = runTaskTests () |> Async.AwaitTask
     System.Console.ReadLine () |> ignore

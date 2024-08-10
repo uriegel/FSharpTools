@@ -84,7 +84,7 @@ module Functional =
             
     /// <summary>
     /// Helper function for composing functions (Railway Oriented Programming). 
-    /// Slot for dead end function (Inject side effects in function coposition pipeline)
+    /// Slot for dead end function (Inject side effects in function composition pipeline)
     /// </summary>
     /// <param name="f">function with one input parameter 'a. This is the dead end function</param>
     /// <param name="x">input parameter 'a</param>
@@ -93,6 +93,20 @@ module Functional =
         f x |> ignore
         x                   
     
+    /// <summary>
+    /// Helper function for composing functions (Railway Oriented Programming). 
+    /// Slot for dead end function (Inject side effects in function composition pipeline)
+    /// The side effect is only invoked when predicate is true
+    /// </summary>
+    /// <param name="predicate">function with one input parameter 'a returning true or false</param>
+    /// <param name="f">function with one input parameter 'a. This is the dead end function</param>
+    /// <param name="x">input parameter 'a</param>
+    /// <returns>'a</returns>
+    let sideEffectIf predicate f x =
+        if predicate x then
+            f x |> ignore
+        x                   
+
     /// <summary>
     /// Takes the first element of a tuple disgarding the second
     /// </summary>

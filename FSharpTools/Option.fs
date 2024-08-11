@@ -16,6 +16,17 @@ module Option =
         | _ -> None
 
     /// <summary>
+    /// Checking a nullabe reference if null returning an option
+    /// </summary>    
+    /// <param name="value">Value of type 'a</param>
+    /// <returns>option&lt;'a&gt;</returns>
+    let checkNull value =
+        if isNull value then
+            None
+        else
+            Some value
+
+    /// <summary>
     /// Helper function for composing functions with Fish operator with option (Railway Oriented Programming)
     /// </summary>
     /// <param name="f">function with one input parameter 'a returning 'b</param>

@@ -9,11 +9,13 @@ open FSharpTools
 type Contact = {
     Name: string option
     Number: int option
+    Nothing: bool
 }
 
 type FakeContact = {
     FakeName: string option
     FakeNumber: int option
+    Nothing: bool
 }
 
 let fromEven i = 
@@ -77,9 +79,9 @@ let runTaskTests () =
 
 let run () = async {
 
-    let x = TextJson.serialize { Name = Some "Uwe Riegel"; Number = Some 89 }
+    let x = TextJson.serialize { Name = Some "Uwe Riegel"; Number = Some 89; Nothing = false }
     let k: FakeContact = TextJson.deserialize x
-    let k: FakeContact = TextJson.deserialize "{}"
+    let k = TextJson.deserialize<FakeContact> ""
     printfn "%A" k
     try 
         TextJson.deserialize "nothing"

@@ -4,6 +4,7 @@ open System.Text.Json
 open System.Text.Json.Serialization
 
 module TextJson =
+    open System.IO
     
     let Default = JsonSerializerOptions(
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
@@ -18,3 +19,9 @@ module TextJson =
 
     let serialize<'a> = serializeWithOptions<'a> Default
     let deserialize<'a> = deserializeWithOptions<'a> Default
+
+    let deserializeStream<'a> (s: Stream) =
+        JsonSerializer.Deserialize<'a>(s, Default)
+
+    
+

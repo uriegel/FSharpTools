@@ -22,3 +22,10 @@ module Stream =
     let openRead path = 
         let fileOpen () = File.OpenRead path :> IO.Stream
         catch fileOpen
+
+// TODO StreamReader
+    // let withStreamReader (stream: Stream) =
+    //     new StreamReader(stream)
+
+    // let readToEnd (sr: StreamReader) =
+    //     sr.ReadToEnd ()

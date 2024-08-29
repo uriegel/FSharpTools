@@ -1,6 +1,12 @@
 namespace FSharpTools
-module Directory = 
+open System
 
+type FileSystemInfo = {
+    Path: string
+    Items: IO.FileSystemInfo array
+}
+
+module Directory = 
     open System
     open System.IO
 
@@ -71,15 +77,31 @@ module Directory =
     /// <summary>
     /// Retrieves FileSystemInfos for the specified path, first Infos of directories, then infos of files.
     /// </summary>
-    let getFileSystemInfos path = 
+    /// <param name="path">Path for retrieving file system infos</param>
+    /// <returns>FileSystemInfos and current path</returns>
+    let getFileSystemInfo path = 
         let getAsInfo n = n :> FileSystemInfo
-        let getFiles path = DirectoryInfo(path).GetFiles() |> Array.map getAsInfo
+        let dirInfo = DirectoryInfo path
+        let getFiles path = dirInfo.GetFiles() |> Array.map getAsInfo
         let getDirectories path = 
             DirectoryInfo(path).GetDirectories() 
             |> Array.sortWith (fun x y -> String.Compare(x.Name, y.Name, StringComparison.CurrentCultureIgnoreCase))
             |> Array.map getAsInfo
-        let getFileSystemInfos path = Array.concat [|getDirectories path; getFiles path |] 
+        let getFileSystemInfos path = 
+            let items = Array.concat [|getDirectories path; getFiles path |] 
+            {
+                Path = dirInfo.FullName
+                Items = items
+            }   
         catch (fun () -> getFileSystemInfos path)
+
+    /// <summary>
+    /// Retrieves FileSystemInfos for the specified path, first Infos of directories, then infos of files.
+    /// </summary>
+    /// <param name="path">Path for retrieving file system infos</param>
+    /// <returns>FileSystemInfos</returns>
+    let getFileSystemInfos = 
+        getFileSystemInfo >> (fun info -> info |> Result.map (fun i -> i.Items))
 
     let existsFile file = File.Exists file    
 

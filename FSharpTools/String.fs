@@ -294,5 +294,17 @@ module String =
         | Some s, Some e -> Some (str |> substring2 (s + (startStr |> String.length)) (e - s - (startStr |> String.length)))
         | _                         -> None
 
+    /// <summary>
+    /// Returns a substring after 'startStr'
+    /// </summary>
+    /// <param name="startStr">After this str the substring starts</param>
+    /// <param name="str">The string to be extracted</param>
+    /// <returns>'Some substring' after startStr or None</returns>
+    let subStringAfter startStr str = 
+        let startIndex = str |> indexOf startStr
+        match startIndex with
+        | Some s -> Some (str |> substring (s + (startStr |> String.length)))
+        | _ -> None
+
     let isEmpty str = 
         String.IsNullOrEmpty str

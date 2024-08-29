@@ -74,7 +74,10 @@ module Directory =
     let getFileSystemInfos path = 
         let getAsInfo n = n :> FileSystemInfo
         let getFiles path = DirectoryInfo(path).GetFiles() |> Array.map getAsInfo
-        let getDirectories path = DirectoryInfo(path).GetDirectories() |> Array.map getAsInfo
+        let getDirectories path = 
+            DirectoryInfo(path).GetDirectories() 
+            |> Array.sortWith (fun x y -> String.Compare(x.Name, y.Name, StringComparison.CurrentCultureIgnoreCase))
+            |> Array.map getAsInfo
         let getFileSystemInfos path = Array.concat [|getDirectories path; getFiles path |] 
         catch (fun () -> getFileSystemInfos path)
 

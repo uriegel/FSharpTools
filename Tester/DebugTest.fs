@@ -79,6 +79,8 @@ let runTaskTests () =
 
 let run () = async {
 
+    let home = Directory.getHomeDir ()
+
     let x = TextJson.serialize { Name = Some "Uwe Riegel"; Number = Some 89; Nothing = false }
     let k: FakeContact = TextJson.deserialize x
     let k = TextJson.deserialize<FakeContact> ""

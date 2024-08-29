@@ -58,7 +58,7 @@ module Directory =
     /// Gets the user's home directory. /home/<user> for Linux 
     /// </summary>
     /// <returns>The user's home directory</returns>
-    let getHomeDir = memoize retrieveHomeDir
+    let getHomeDir = memoizeSingle retrieveHomeDir
 
     let getFiles path = 
         let getFiles () = DirectoryInfo(path).GetFiles()

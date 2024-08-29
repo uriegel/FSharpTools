@@ -5,6 +5,7 @@ module Directory =
     open System.IO
 
     open Result
+    open Functional
 
     /// <summary>
     /// </summary>
@@ -50,6 +51,14 @@ module Directory =
             scheme
             application
         |] |> combinePathes 
+
+    let internal retrieveHomeDir () = Environment.GetFolderPath Environment.SpecialFolder.UserProfile
+
+    /// <summary>
+    /// Gets the user's home directory. /home/<user> for Linux 
+    /// </summary>
+    /// <returns>The user's home directory</returns>
+    let getHomeDir = memoize retrieveHomeDir
 
     let getFiles path = 
         let getFiles () = DirectoryInfo(path).GetFiles()

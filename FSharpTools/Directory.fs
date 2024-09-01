@@ -1,5 +1,6 @@
 namespace FSharpTools
 open System
+open EnumExtensions
 
 type FileSystemInfo = {
     Path: string
@@ -116,3 +117,13 @@ module Directory =
         let move () = Directory.Move (sourcePath, targetPath)
         catch move
 
+    /// <summary>
+    /// Check if this path is a directory or a file
+    /// </summary>
+    /// <param name="path">Path od file or directory</param>
+    /// <returns>true: is directory, otherwise false</returns>
+    let isDirectory (path: string) = 
+        if File.Exists path then
+            File.GetAttributes (path) |> hasFlag FileAttributes.Directory 
+        else
+            false

@@ -49,9 +49,9 @@
     <Compile Include="Disposable.fs" />
     <Compile Include="DisposableExtensions.fs" />
     <Compile Include="Stream.fs" />
+    <Compile Include="EnumExtensions.fs" />
     <Compile Include="Directory.fs" />
     <Compile Include="File.fs" />
-    <Compile Include="EnumExtensions.fs" />
     <Compile Include="EnumerableExtensions.fs" />
     <Compile Include="ExifReader.fs" />
     <Compile Include="UrlQueryComponents.fs" />

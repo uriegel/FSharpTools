@@ -123,7 +123,10 @@ module Directory =
     /// <param name="path">Path od file or directory</param>
     /// <returns>true: is directory, otherwise false</returns>
     let isDirectory (path: string) = 
-        if File.Exists path then
-            File.GetAttributes (path) |> hasFlag FileAttributes.Directory 
-        else
-            false
+        try
+            if File.Exists path then
+                File.GetAttributes (path) |> hasFlag FileAttributes.Directory 
+            else
+                false
+        with
+        | _ -> false

@@ -140,7 +140,9 @@ module ExifReader =
             member x.Dispose() = reader.Dispose ()
         member this.GetTagValue with get() = fun (n: ExifTag) -> getTagValue (uint16 n)
         member this.getTagValue<'a>(n: ExifTag) = 
-            getTagValue (uint16 n) :?> 'a
+            getTagValue (uint16 n) 
+            |> Option.checkNull
+            |> Option.map (fun n -> n :?> 'a)
 
     let getDateValue (exifTag: ExifTag) (reader: Reader) = 
         toDate (string (reader.GetTagValue exifTag))

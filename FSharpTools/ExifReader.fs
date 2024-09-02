@@ -139,6 +139,8 @@ module ExifReader =
         interface IDisposable with
             member x.Dispose() = reader.Dispose ()
         member this.GetTagValue with get() = fun (n: ExifTag) -> getTagValue (uint16 n)
+        member this.getTagValue<'a>(n: ExifTag) = 
+            getTagValue (uint16 n) :?> 'a
 
     let getDateValue (exifTag: ExifTag) (reader: Reader) = 
         toDate (string (reader.GetTagValue exifTag))
@@ -245,6 +247,17 @@ module ExifReader =
 
             convertedData
 
+        let getDoubleFromArray (data: byte array) (elementLengthBytes: int) (converter: Byte[] -> Object) = 
+            let convertedData = Array.CreateInstance(typeof<double>, data.Length / elementLengthBytes)
+            let buffer = Array.zeroCreate elementLengthBytes
+            [0..data.Length/int elementLengthBytes - 1] |> List.iter (fun elementCount ->
+                Array.Copy(data, elementCount * elementLengthBytes, buffer, 0, elementLengthBytes)
+                convertedData.SetValue(converter(buffer), elementCount))
+            
+            match convertedData with
+            | :? (double array) as da -> da[0] + da[1]/60.0 + da[2]/3600.0
+            | _ -> 0                
+
         let ReadToExifStart () = 
             // The file has a number of blocks (Exif/JFIF), each of which
             // has a tag number followed by a length. We scan the document until the required tag (0xFFE1)
@@ -333,7 +346,7 @@ module ExifReader =
                 | 5us ->
                     match numberOfComponents with 
                     | 1u -> ToURational tagData :> Object
-                    | _ -> GetArray tagData fieldLength (fun bs -> ToURational(bs) :> Object) :> Object
+                    | _ -> getDoubleFromArray tagData (int fieldLength) (fun bs -> ToURational(bs) :> Object) :> Object
                 | 6us ->
                     match numberOfComponents with 
                     | 1u -> ToSByte tagData :> Object

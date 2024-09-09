@@ -4,9 +4,9 @@
     <AssemblyName>FSharpTools</AssemblyName>
     <OutputType>Library</OutputType>
     <TargetFramework>net8.0</TargetFramework>
-    <Version>10.2.9</Version>
-    <FileVersion>10.2.9.0</FileVersion>
-    <AssemblyVersion>10.2.9.0</AssemblyVersion>
+    <Version>10.3.0</Version>
+    <FileVersion>10.3.0.0</FileVersion>
+    <AssemblyVersion>10.3.0.0</AssemblyVersion>
     <Authors>Uwe Riegel</Authors>
     <Company>Uwe Riegel</Company>
     <Copyright>Uwe Riegel</Copyright>
@@ -14,7 +14,7 @@
     <PackageLicenseUrl>
     </PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/uriegel/FSharpTools</PackageProjectUrl>
-    <PackageReleaseNotes>AsyncResult: mapError, bindToError, bindToOk</PackageReleaseNotes>
+    <PackageReleaseNotes>TaskResult: mapError, bindToError, bindToOk</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -34,6 +34,7 @@
     <Compile Include="OptionTask.fs" />
     <Compile Include="Result.fs" />
     <Compile Include="AsyncResult.fs" />
+    <Compile Include="TaskResult.fs" />
     <Compile Include="Option.fs" />
     <Compile Include="Resources.fs" />
     <Compile Include="AsyncOption.fs" />
